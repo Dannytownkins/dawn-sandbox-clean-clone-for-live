@@ -28,6 +28,24 @@
     },
     "product_showcase": {
       "type": "product-showcase",
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "product": "sunny-t-shirt"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "product": "short-sleeve-skelly-t"
+          }
+        }
+      },
+      "block_order": [
+        "product_1",
+        "product_2"
+      ],
       "settings": {
         "heading": "Featured Products",
         "subheading": "Discover our handpicked selection of premium products",
