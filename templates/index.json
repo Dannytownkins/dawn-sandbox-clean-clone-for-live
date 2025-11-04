@@ -28,17 +28,6 @@
     },
     "product_showcase": {
       "type": "product-showcase",
-      "blocks": {
-        "product_7hNWfK": {
-          "type": "product",
-          "settings": {
-            "product": ""
-          }
-        }
-      },
-      "block_order": [
-        "product_7hNWfK"
-      ],
       "settings": {
         "heading": "Featured Products",
         "subheading": "Discover our handpicked selection of premium products",
