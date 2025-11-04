@@ -42,7 +42,7 @@
       "settings": {
         "heading": "Featured Products",
         "subheading": "Discover our handpicked selection of premium products",
-        "collection": "",
+        "collection": "dark-humor",
         "limit": 2,
         "text_align": "center",
         "image_max": 1000,
