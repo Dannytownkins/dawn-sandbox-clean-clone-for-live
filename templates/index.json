@@ -32,13 +32,13 @@
         "product_1": {
           "type": "product",
           "settings": {
-            "product": "sunny-t-shirt"
+            "product": "short-sleeve-skelly-t"
           }
         },
         "product_2": {
           "type": "product",
           "settings": {
-            "product": "short-sleeve-skelly-t"
+            "product": "sunny-t-shirt"
           }
         }
       },

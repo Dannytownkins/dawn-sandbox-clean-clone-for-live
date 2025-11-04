@@ -106,29 +106,6 @@
 
 <section class="hero-split">
   <div class="hero-split__grid">
-    <!-- Light -->
-    <div class="hero-split__pane hero-split__pane--light">
-      {% if section.settings.light_image %}
-        <img
-          class="hero-split__img"
-          src="{{ section.settings.light_image | image_url: width: 2000 }}"
-          alt="{{ section.settings.light_title | escape }}"
-          width="2000"
-          height="1125"
-        >
-      {% endif %}
-      <span class="hero-split__shade"></span>
-      <div class="hero-split__content">
-        <div class="hero-split__content-inner">
-          <h2 class="hero-split__title">{{ section.settings.light_title }}</h2>
-          <p class="hero-split__desc">{{ section.settings.light_desc }}</p>
-          {% if section.settings.light_link != blank %}
-            <a class="hero-split__btn" href="{{ section.settings.light_link }}">Shop Light</a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-
     <!-- Dark -->
     <div class="hero-split__pane hero-split__pane--dark">
       {% if section.settings.dark_image %}
@@ -147,6 +124,29 @@
           <p class="hero-split__desc">{{ section.settings.dark_desc }}</p>
           {% if section.settings.dark_link != blank %}
             <a class="hero-split__btn" href="{{ section.settings.dark_link }}">Shop Dark</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Light -->
+    <div class="hero-split__pane hero-split__pane--light">
+      {% if section.settings.light_image %}
+        <img
+          class="hero-split__img"
+          src="{{ section.settings.light_image | image_url: width: 2000 }}"
+          alt="{{ section.settings.light_title | escape }}"
+          width="2000"
+          height="1125"
+        >
+      {% endif %}
+      <span class="hero-split__shade"></span>
+      <div class="hero-split__content">
+        <div class="hero-split__content-inner">
+          <h2 class="hero-split__title">{{ section.settings.light_title }}</h2>
+          <p class="hero-split__desc">{{ section.settings.light_desc }}</p>
+          {% if section.settings.light_link != blank %}
+            <a class="hero-split__btn" href="{{ section.settings.light_link }}">Shop Light</a>
           {% endif %}
         </div>
       </div>
