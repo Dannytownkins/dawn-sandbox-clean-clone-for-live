@@ -1,1 +1,61 @@
-{"sections":{"main":{"type":"main-404","settings":{}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "disabled": true,
+      "settings": {
+        "text_align": "center",
+        "pad_y": 40,
+        "image_max": 800,
+        "button_align": "left"
+      }
+    },
+    "collection_list_j9dATk": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_9BRhPk": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "dark-humor"
+          }
+        },
+        "featured_collection_4D3hCe": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "light-humor"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_9BRhPk",
+        "featured_collection_4D3hCe"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Collections",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "collection_list_j9dATk"
+  ]
+}
