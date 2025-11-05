@@ -32,13 +32,15 @@
         "product_1": {
           "type": "product",
           "settings": {
-            "product": "sarcastic-tee-everything-is-fine-probably-unisex-jersey"
+            "product": "sarcastic-tee-everything-is-fine-probably-unisex-jersey",
+            "custom_title": "Skelly T - Everything is Fine... Probably"
           }
         },
         "product_2": {
           "type": "product",
           "settings": {
-            "product": "sun-graphic-unisex-tee-everythings-fine-probably"
+            "product": "sun-graphic-unisex-tee-everythings-fine-probably",
+            "custom_title": "Sunny T - Everything's Fine (Probably)"
           }
         }
       },

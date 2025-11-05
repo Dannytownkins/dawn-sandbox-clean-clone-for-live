@@ -60,6 +60,29 @@
               assign footer_grid_class = 'grid--3-col-tablet'
             endif
           -%}
+          <style>
+            .footer__blocks-wrapper {
+              display: grid !important;
+              grid-template-columns: 1fr 1fr !important;
+              gap: 3rem !important;
+              max-width: 1200px;
+              margin: 0 auto 3rem;
+            }
+            @media (max-width: 749px) {
+              .footer__blocks-wrapper {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+              }
+            }
+            .footer-block {
+              flex: 1;
+            }
+            .footer-block__newsletter {
+              max-width: 600px;
+              margin: 0 auto;
+              text-align: center;
+            }
+          </style>
           <div
             class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
             {% if settings.animations_reveal_on_scroll %}
