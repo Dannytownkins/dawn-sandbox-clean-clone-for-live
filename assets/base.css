@@ -4425,10 +4425,11 @@ aside[aria-labelledby="cart-drawer"] {
 
 /* Cart bubble style (keep, but tidy) */
 .header__icon--cart .cart-count-bubble{
-  position: absolute; top: 4px; right: 4px;
+  position: absolute; top: 0; right: -2px;
   background: #F7E06A; color: #111;
-  min-width: 16px; height: 16px; line-height: 16px;
-  padding: 0 4px; border-radius: 999px; font-size: 11px;
+  min-width: 18px; height: 18px; line-height: 18px;
+  padding: 0 5px; border-radius: 999px; font-size: 11px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 /* Hamburger states */
@@ -4482,9 +4483,10 @@ aside[aria-labelledby="cart-drawer"] {
   display:inline-flex; align-items:center; justify-content:center;
 }
 .header__icon--cart .cart-count-bubble{
-  position:absolute; top:4px; right:4px;
-  background:#F7E06A; color:#111; min-width:16px; height:16px;
-  line-height:16px; padding:0 4px; border-radius:999px; font-size:11px;
+  position:absolute; top:0; right:-2px;
+  background:#F7E06A; color:#111; min-width:18px; height:18px;
+  line-height:18px; padding:0 5px; border-radius:999px; font-size:11px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.3);
 }
 .menu-drawer__inner-container{ background:#0b0b0c; color:#fff; }
 .menu-drawer__menu-item{ color:#fff; }
@@ -4505,6 +4507,6 @@ aside[aria-labelledby="cart-drawer"] {
 
 /* MCP_HEADER_ICONS */
 .header__icons .header__icon,.header__icons .menu-drawer__trigger{background:transparent!important;border:0!important;box-shadow:none!important;color:#fff;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;}
-.header__icon--cart .cart-count-bubble{position:absolute;top:4px;right:4px;background:#F7E06A;color:#111;min-width:16px;height:16px;line-height:16px;padding:0 4px;border-radius:999px;font-size:11px;}
+.header__icon--cart .cart-count-bubble{position:absolute;top:0;right:-2px;background:#F7E06A;color:#111;min-width:18px;height:18px;line-height:18px;padding:0 5px;border-radius:999px;font-size:11px;box-shadow:0 1px 3px rgba(0,0,0,0.3);}
 .menu-drawer__inner-container{background:#0b0b0c;color:#fff;}
 .menu-drawer__menu-item{color:#fff;}
