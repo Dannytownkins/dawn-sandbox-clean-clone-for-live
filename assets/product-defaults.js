@@ -4,12 +4,10 @@
  */
 
 (() => {
-  // Wait for DOM to be ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setProductDefaults);
-  } else {
-    setProductDefaults();
-  }
+  // Wait for page to fully load including all scripts
+  window.addEventListener('load', () => {
+    setTimeout(setProductDefaults, 100); // Small delay to ensure variant selectors are initialized
+  });
 
   function setProductDefaults() {
     // Get product handle from the product-info element
@@ -22,63 +20,71 @@
     // Define defaults based on product handle
     const defaults = {
       'sarcastic-tee-everything-is-fine-probably-unisex-jersey': {
-        color: 'Black',
-        size: 'L'
+        'Color': 'Black',
+        'Size': 'L'
       },
       'sun-graphic-unisex-tee-everythings-fine-probably': {
-        color: 'Natural',
-        size: 'L'
+        'Color': 'Natural',
+        'Size': 'L'
       }
     };
 
     const productDefaults = defaults[productHandle];
     if (!productDefaults) return; // No defaults for this product
 
+    console.log('Setting defaults for:', productHandle, productDefaults);
+
     // Set the defaults
     setVariantOptions(productDefaults);
   }
 
   function setVariantOptions(defaults) {
-    // Find all variant option inputs/selects
-    const form = document.querySelector('form[data-type="add-to-cart-form"]');
-    if (!form) return;
-
-    // Handle both radio buttons and select dropdowns
-    const optionInputs = form.querySelectorAll('input[name^="options"], select[name^="options"]');
-    
-    optionInputs.forEach((input) => {
-      const optionName = input.closest('fieldset, .product-form__input')?.querySelector('legend, label')?.textContent?.trim()?.toLowerCase();
-      
-      if (!optionName) return;
-
-      // Check if this option matches one of our defaults
-      if (optionName.includes('color') || optionName.includes('colour')) {
-        selectOption(input, defaults.color);
-      } else if (optionName.includes('size')) {
-        selectOption(input, defaults.size);
-      }
-    });
-  }
-
-  function selectOption(input, value) {
-    if (!value) return;
-
-    if (input.tagName === 'SELECT') {
-      // Handle select dropdowns
-      const option = Array.from(input.options).find(opt => 
-        opt.value.toLowerCase() === value.toLowerCase()
-      );
-      if (option) {
-        input.value = option.value;
-        input.dispatchEvent(new Event('change', { bubbles: true }));
-      }
-    } else if (input.type === 'radio') {
-      // Handle radio buttons
-      if (input.value.toLowerCase() === value.toLowerCase()) {
-        input.checked = true;
-        input.dispatchEvent(new Event('change', { bubbles: true }));
-      }
+    // Find variant-selects component
+    const variantSelects = document.querySelector('variant-selects');
+    if (!variantSelects) {
+      console.log('variant-selects not found');
+      return;
     }
+
+    // Find all fieldsets (each represents an option like Color, Size)
+    const fieldsets = variantSelects.querySelectorAll('fieldset, .product-form__input');
+    
+    fieldsets.forEach((fieldset) => {
+      // Get the option name from legend or label
+      const legend = fieldset.querySelector('legend, label');
+      if (!legend) return;
+      
+      const optionName = legend.textContent.trim().replace(':', '').trim();
+      const defaultValue = defaults[optionName];
+      
+      if (!defaultValue) return;
+      
+      console.log('Setting option:', optionName, 'to:', defaultValue);
+
+      // Find the input/select for this option
+      const inputs = fieldset.querySelectorAll('input[type="radio"], select');
+      
+      inputs.forEach((input) => {
+        if (input.tagName === 'SELECT') {
+          // Handle select dropdown
+          const option = Array.from(input.options).find(opt => 
+            opt.value.trim() === defaultValue
+          );
+          if (option) {
+            input.value = option.value;
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            console.log('Selected dropdown:', defaultValue);
+          }
+        } else if (input.type === 'radio') {
+          // Handle radio button
+          if (input.value.trim() === defaultValue) {
+            input.checked = true;
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            console.log('Checked radio:', defaultValue);
+          }
+        }
+      });
+    });
   }
 })();
 
