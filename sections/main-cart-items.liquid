@@ -24,6 +24,35 @@
   cart-items > div {
     padding-bottom: 24px !important;
   }
+  
+  /* Fix cart item layout to prevent title overlap */
+  .cart-item__media {
+    width: 120px;
+    min-width: 120px;
+  }
+  
+  .cart-item__image-container {
+    max-width: 120px;
+  }
+  
+  .cart-item__details {
+    padding-left: 1.5rem;
+  }
+  
+  @media screen and (max-width: 749px) {
+    .cart-item__media {
+      width: 100px;
+      min-width: 100px;
+    }
+    
+    .cart-item__image-container {
+      max-width: 100px;
+    }
+    
+    .cart-item__details {
+      padding-left: 1rem;
+    }
+  }
 
   /* Checkout button styling */
   .cart__checkout-wrapper .cart__checkout-button {
@@ -513,6 +542,108 @@
     </form>
   </div>
 </div>
+
+<script>
+// Update cart count badge when quantity changes on main cart page
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('cart');
+  if (!form) return;
+  
+  // Update cart badge count
+  function updateCartBadge(totalCount) {
+    const badges = document.querySelectorAll('.cart-count-bubble span[aria-hidden="true"]');
+    badges.forEach(badge => {
+      badge.textContent = totalCount;
+    });
+  }
+  
+  // Calculate total item count
+  function calculateTotalItems() {
+    let total = 0;
+    const inputs = form.querySelectorAll('.quantity__input');
+    inputs.forEach(input => {
+      total += parseInt(input.value) || 0;
+    });
+    return total;
+  }
+  
+  // Update prices dynamically
+  async function updateCartPrices(lineItem, newQuantity) {
+    const index = lineItem.dataset.index;
+    const variantId = lineItem.querySelector('[data-quantity-variant-id]').dataset.quantityVariantId;
+    
+    try {
+      // Update cart via Shopify API
+      const response = await fetch('/cart/change.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          id: variantId,
+          quantity: newQuantity
+        })
+      });
+      
+      if (response.ok) {
+        const cart = await response.json();
+        // Update badge
+        updateCartBadge(cart.item_count);
+        
+        // Refresh cart section to update prices
+        const sectionResponse = await fetch(window.location.pathname + '?section_id=main-cart-items');
+        if (sectionResponse.ok) {
+          const html = await sectionResponse.text();
+          const parser = new DOMParser();
+          const newDocument = parser.parseFromString(html, 'text/html');
+          const newCartItems = newDocument.querySelector('.cart__items');
+          const currentCartItems = document.querySelector('.cart__items');
+          
+          if (newCartItems && currentCartItems) {
+            currentCartItems.innerHTML = newCartItems.innerHTML;
+            // Re-attach event listeners
+            attachQuantityListeners();
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error updating cart:', error);
+    }
+  }
+  
+  // Attach listeners to quantity buttons
+  function attachQuantityListeners() {
+    const quantityButtons = form.querySelectorAll('.quantity__button');
+    const quantityInputs = form.querySelectorAll('.quantity__input');
+    
+    quantityButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const quantityInput = this.parentElement.querySelector('.quantity__input');
+        const currentValue = parseInt(quantityInput.value) || 0;
+        const isPlus = this.name === 'plus';
+        const newValue = isPlus ? currentValue + 1 : Math.max(0, currentValue - 1);
+        
+        quantityInput.value = newValue;
+        const cartItem = this.closest('.cart-item');
+        updateCartPrices(cartItem, newValue);
+      });
+    });
+    
+    quantityInputs.forEach(input => {
+      input.addEventListener('change', function() {
+        const newValue = parseInt(this.value) || 0;
+        const cartItem = this.closest('.cart-item');
+        updateCartPrices(cartItem, newValue);
+      });
+    });
+  }
+  
+  // Initial setup
+  attachQuantityListeners();
+});
+</script>
 
 {% schema %}
 {
