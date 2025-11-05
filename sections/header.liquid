@@ -52,14 +52,14 @@
           {{- cart.item_count -}}
         </span>
       </button>
-
-      <!-- Mobile hamburger (visible ≤ 989px) -->
-      <button class="ast-hamburger" aria-controls="ast-mobile-drawer" aria-expanded="false" aria-label="Open menu">
-        <svg class="icon icon-hamburger" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-          <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" fill="currentColor"/>
-        </svg>
-      </button>
     </div>
+
+    <!-- Mobile hamburger (visible ≤ 989px) -->
+    <button class="ast-hamburger" aria-controls="ast-mobile-drawer" aria-expanded="false" aria-label="Open menu">
+      <svg class="icon icon-hamburger" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+        <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" fill="currentColor"/>
+      </svg>
+    </button>
   </div>
 
   <!-- Mobile drawer - NO TRUST BAR INSIDE -->
@@ -153,26 +153,26 @@ img, video, iframe {
 /* Mobile visibility */
 @media (max-width: 989px){
   .ast-hamburger{ display:flex }
-  .header__inline-menu, .list-menu--inline{ display:none !important; }
+  .header__inline-menu, .list-menu--inline, .main-nav{ display:none !important; }
   
-  /* Mobile header uses grid layout */
+  /* Mobile header uses flexbox for proper centering */
   .header-row {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    position: relative;
   }
   
   /* Logo stays left */
   .logo {
-    grid-column: 1;
-    justify-self: start;
+    flex: 0 0 auto;
   }
   
-  /* Center the 3 icons (search, account, cart) */
+  /* Center the 3 icons (search, account, cart) absolutely */
   .header-ctas {
-    grid-column: 2;
-    justify-self: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     gap: 12px;
     display: flex;
     align-items: center;
@@ -180,8 +180,8 @@ img, video, iframe {
   
   /* Hamburger stays right */
   .ast-hamburger {
-    grid-column: 3;
-    justify-self: end;
+    flex: 0 0 auto;
+    margin-left: auto;
   }
   
   .header__icon--search, 
