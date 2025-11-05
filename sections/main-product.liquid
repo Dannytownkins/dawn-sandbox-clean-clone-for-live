@@ -41,6 +41,17 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    /* Hide all inventory warnings for POD products */
+    .product__inventory,
+    [id^="Inventory-"],
+    [role="status"].product__inventory {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
