@@ -97,6 +97,42 @@
   .cart__ctas {
     justify-content: center;
   }
+  
+  /* Fix table header alignment */
+  .cart-items thead th {
+    text-align: left;
+    padding: 0 0 1rem 0;
+    font-weight: normal;
+    opacity: 0.85;
+  }
+  
+  .cart-items thead th:last-child {
+    text-align: right;
+  }
+  
+  .cart-items thead th.cart-items__heading--quantity {
+    text-align: center;
+  }
+  
+  /* Ensure proper column widths */
+  .cart-items {
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  .cart-item__media {
+    width: 120px;
+  }
+  
+  .cart-item__quantity {
+    width: 150px;
+    text-align: center;
+  }
+  
+  .cart-item__totals {
+    width: 120px;
+    text-align: right;
+  }
 </style>
 
 <div class="section section-{{ section.id }}">
@@ -617,22 +653,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const quantityButtons = form.querySelectorAll('.quantity__button');
     const quantityInputs = form.querySelectorAll('.quantity__input');
     
+    // Remove any existing listeners to prevent duplicates
     quantityButtons.forEach(button => {
+      const newButton = button.cloneNode(true);
+      button.parentNode.replaceChild(newButton, button);
+    });
+    
+    quantityInputs.forEach(input => {
+      const newInput = input.cloneNode(true);
+      input.parentNode.replaceChild(newInput, input);
+    });
+    
+    // Re-query after cloning
+    const freshButtons = form.querySelectorAll('.quantity__button');
+    const freshInputs = form.querySelectorAll('.quantity__input');
+    
+    freshButtons.forEach(button => {
       button.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         const quantityInput = this.parentElement.querySelector('.quantity__input');
         const currentValue = parseInt(quantityInput.value) || 0;
         const isPlus = this.name === 'plus';
         const newValue = isPlus ? currentValue + 1 : Math.max(0, currentValue - 1);
         
         quantityInput.value = newValue;
-        const cartItem = this.closest('.cart-item');
-        updateCartPrices(cartItem, newValue);
+        quantityInput.dispatchEvent(new Event('change'));
       });
     });
     
-    quantityInputs.forEach(input => {
-      input.addEventListener('change', function() {
+    freshInputs.forEach(input => {
+      input.addEventListener('change', function(e) {
+        e.stopPropagation();
         const newValue = parseInt(this.value) || 0;
         const cartItem = this.closest('.cart-item');
         updateCartPrices(cartItem, newValue);

@@ -4425,10 +4425,11 @@ aside[aria-labelledby="cart-drawer"] {
 
 /* Cart bubble style (keep, but tidy) */
 .header__icon--cart .cart-count-bubble{
-  position: absolute; top: 2px; right: 0;
+  position: absolute; top: -4px; right: -8px;
   background: #F7E06A; color: #111;
-  min-width: 18px; height: 18px; line-height: 18px;
-  padding: 0 5px; border-radius: 999px; font-size: 11px;
+  min-width: 20px; height: 20px; line-height: 20px;
+  padding: 0 6px; border-radius: 999px; font-size: 11px;
+  z-index: 1;
 }
 
 /* Hamburger states */
@@ -4482,9 +4483,10 @@ aside[aria-labelledby="cart-drawer"] {
   display:inline-flex; align-items:center; justify-content:center;
 }
 .header__icon--cart .cart-count-bubble{
-  position:absolute; top:2px; right:0;
-  background:#F7E06A; color:#111; min-width:18px; height:18px;
-  line-height:18px; padding:0 5px; border-radius:999px; font-size:11px;
+  position:absolute; top:-4px; right:-8px;
+  background:#F7E06A; color:#111; min-width:20px; height:20px;
+  line-height:20px; padding:0 6px; border-radius:999px; font-size:11px;
+  z-index:1;
 }
 .menu-drawer__inner-container{ background:#0b0b0c; color:#fff; }
 .menu-drawer__menu-item{ color:#fff; }
@@ -4504,7 +4506,7 @@ aside[aria-labelledby="cart-drawer"] {
 @media (max-width:640px){.ast-usp__inner{justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;}.ast-usp__inner>*{flex:0 0 auto;}}
 
 /* MCP_HEADER_ICONS */
-.header__icons .header__icon,.header__icons .menu-drawer__trigger{background:transparent!important;border:0!important;box-shadow:none!important;color:#fff;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;}
-.header__icon--cart .cart-count-bubble{position:absolute;top:2px;right:0;background:#F7E06A;color:#111;min-width:18px;height:18px;line-height:18px;padding:0 5px;border-radius:999px;font-size:11px;}
+.header__icons .header__icon,.header__icons .menu-drawer__trigger{background:transparent!important;border:0!important;box-shadow:none!important;color:#fff;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;position:relative;}
+.header__icon--cart .cart-count-bubble{position:absolute;top:-4px;right:-8px;background:#F7E06A;color:#111;min-width:20px;height:20px;line-height:20px;padding:0 6px;border-radius:999px;font-size:11px;z-index:1;}
 .menu-drawer__inner-container{background:#0b0b0c;color:#fff;}
 .menu-drawer__menu-item{color:#fff;}

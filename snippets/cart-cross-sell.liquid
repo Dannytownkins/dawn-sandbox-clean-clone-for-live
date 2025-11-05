@@ -3,14 +3,14 @@
 {% assign in_cart_ids = '' | split: ',' %}
 {% for it in cart.items %}{% assign in_cart_ids = in_cart_ids | push: it.product_id %}{% endfor %}
 <style>
-.xsell{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);background:transparent !important;}
-.xsell h4{margin:0 0 10px;font-size:1rem;color:#fff;}
+.xsell{margin-top:24px;padding-top:24px;border-top:1px solid rgba(0,0,0,0.08);background:transparent !important;}
+.xsell h4{margin:0 0 16px;font-size:1.1rem;color:#000;text-align:center;}
 .xsell-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.xsell .card{border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px;background:transparent !important;position:relative;}
+.xsell .card{border:1px solid rgba(0,0,0,0.08);border-radius:12px;padding:10px;background:#fff !important;position:relative;}
 .xsell .card a{display:block;text-decoration:none;color:inherit;position:relative;z-index:10;}
 .xsell img{width:100%;height:auto;display:block;border-radius:8px;pointer-events:none;}
-.xsell .title{font-size:.95rem;margin:6px 0 4px;color:#fff;pointer-events:none;}
-.xsell .price{font-weight:600;margin-bottom:6px;color:#fff;opacity:0.9;pointer-events:none;}
+.xsell .title{font-size:.95rem;margin:6px 0 4px;color:#000;pointer-events:none;text-align:center;line-height:1.3;}
+.xsell .price{font-weight:600;margin-bottom:6px;color:#000;opacity:0.9;pointer-events:none;text-align:center;}
 </style>
 <div class="xsell cart-recommendations">
   {%- assign upsell_heading = 'cart.upsells.heading' | t -%}
