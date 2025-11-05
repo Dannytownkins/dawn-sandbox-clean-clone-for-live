@@ -220,6 +220,38 @@ img, video, iframe {
 @media (min-width: 990px){ 
   .header__icon--search, .header__icon--cart, .icon-btn { border:0; } 
 }
+
+/* Cart badge styling */
+.header__icon--cart {
+  position: relative;
+  overflow: visible !important;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #F7E06A;
+  color: #111;
+  min-width: 20px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure header CTAs don't clip the badge */
+.header-ctas {
+  overflow: visible !important;
+  z-index: 1;
+}
 </style>
 
 <script>

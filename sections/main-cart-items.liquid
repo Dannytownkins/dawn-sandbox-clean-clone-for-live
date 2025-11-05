@@ -133,6 +133,44 @@
     width: 120px;
     text-align: right;
   }
+  
+  /* Fix remove button placement */
+  .cart-item__quantity-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .quantity-popover-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  cart-remove-button {
+    display: inline-flex;
+    margin-left: 8px;
+  }
+  
+  cart-remove-button .button--tertiary {
+    padding: 8px;
+    min-height: auto;
+    background: transparent;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  cart-remove-button .button--tertiary:hover {
+    background: #f5f5f5;
+    border-color: #999;
+  }
+  
+  cart-remove-button .svg-wrapper {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
 
 <div class="section section-{{ section.id }}">
@@ -587,9 +625,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Update cart badge count
   function updateCartBadge(totalCount) {
-    const badges = document.querySelectorAll('.cart-count-bubble span[aria-hidden="true"]');
+    // Update both cart-count-bubble and cart-badge elements
+    const badges = document.querySelectorAll('.cart-count-bubble span[aria-hidden="true"], .cart-badge[data-cart-count]');
     badges.forEach(badge => {
       badge.textContent = totalCount;
+      if (totalCount > 0) {
+        badge.style.display = '';
+      } else {
+        badge.style.display = 'none';
+      }
     });
   }
   
