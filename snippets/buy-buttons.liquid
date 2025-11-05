@@ -59,12 +59,14 @@
           }
           @media screen and (max-width: 749px) {
             .product-form__qty-atc-wrapper {
-              flex-direction: column;
-              gap: 10px;
+              gap: 8px;
             }
-            .product-form__qty-atc-wrapper .product-form__quantity,
+            .product-form__qty-atc-wrapper .product-form__quantity {
+              min-width: 100px;
+            }
             .product-form__qty-atc-wrapper .product-form__submit {
-              width: 100%;
+              font-size: 0.9rem;
+              padding: 10px 12px;
             }
           }
         </style>
