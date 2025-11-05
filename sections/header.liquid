@@ -93,6 +93,12 @@
 </header>
 
 <style>
+/* Prevent horizontal scrolling on mobile */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 /* Sticky header */
 header.header, .shopify-section-header { position: sticky; top: 0; z-index: 40; }
 
@@ -108,6 +114,18 @@ header.header, .shopify-section-header { position: sticky; top: 0; z-index: 40; 
   width: 100%;
   margin: 0 auto;
   padding: 0 24px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Ensure all elements respect viewport */
+* {
+  box-sizing: border-box;
+}
+
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Hamburger (clean icon) */
@@ -137,18 +155,44 @@ header.header, .shopify-section-header { position: sticky; top: 0; z-index: 40; 
   .ast-hamburger{ display:flex }
   .header__inline-menu, .list-menu--inline{ display:none !important; }
   
-  /* Even spacing for mobile icons */
+  /* Restructure mobile header layout */
+  .header-row {
+    position: relative;
+  }
+  
+  /* Center the 3 icons (search, account, cart) */
   .header-ctas {
-    gap: 4px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 12px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Hamburger stays right-aligned */
+  .ast-hamburger {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
   }
   
   .header__icon--search, 
   .header__icon--cart, 
-  .icon-btn,
-  .ast-hamburger { 
+  .icon-btn { 
     width: 44px !important; 
     height: 44px !important;
     display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+  }
+  
+  .ast-hamburger {
+    width: 44px !important; 
+    height: 44px !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     margin: 0 !important;
