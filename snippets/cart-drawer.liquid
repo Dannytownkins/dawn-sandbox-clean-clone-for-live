@@ -451,6 +451,16 @@ async function refreshCartDrawer() {
           }
         }
       }
+      
+      // Update header cart badge count
+      const cartResponse = await fetch('/cart.js');
+      if (cartResponse.ok) {
+        const cart = await cartResponse.json();
+        const badges = document.querySelectorAll('.cart-count-bubble span[aria-hidden="true"]');
+        badges.forEach(badge => {
+          badge.textContent = cart.item_count;
+        });
+      }
     }
   } catch(err) {
     console.error('Cart refresh failed:', err);
