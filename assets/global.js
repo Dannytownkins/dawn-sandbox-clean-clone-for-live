@@ -738,6 +738,9 @@ class SliderComponent extends HTMLElement {
 
     if (!this.slider || !this.nextButton) return;
 
+    // Fix: Initialize slider at first slide
+    this.slider.scrollLeft = 0;
+
     this.initPages();
     const resizeObserver = new ResizeObserver((entries) => this.initPages());
     resizeObserver.observe(this.slider);
