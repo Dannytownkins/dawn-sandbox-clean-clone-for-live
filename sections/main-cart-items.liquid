@@ -134,7 +134,7 @@
     text-align: right;
   }
   
-  /* Fix remove button placement */
+  /* Fix remove button placement - inline with quantity controls */
   .cart-item__quantity-wrapper {
     display: flex;
     align-items: center;
@@ -142,34 +142,44 @@
   }
   
   .quantity-popover-container {
-    display: flex;
-    align-items: center;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px;
   }
   
   cart-remove-button {
-    display: inline-flex;
-    margin-left: 8px;
+    display: inline-flex !important;
+    margin-left: 0 !important;
   }
   
   cart-remove-button .button--tertiary {
-    padding: 8px;
-    min-height: auto;
-    background: transparent;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 10px !important;
+    min-height: auto !important;
+    width: auto !important;
+    background: transparent !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   
   cart-remove-button .button--tertiary:hover {
-    background: #f5f5f5;
-    border-color: #999;
+    background: #f5f5f5 !important;
+    border-color: #999 !important;
   }
   
   cart-remove-button .svg-wrapper {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  
+  cart-remove-button .svg-wrapper svg {
+    width: 18px;
+    height: 18px;
   }
 </style>
 
@@ -438,25 +448,25 @@
                                 </span>
                               </button>
                             </quantity-input>
-                          </div>
-                          <cart-remove-button
-                            id="Remove-{{ item.index | plus: 1 }}"
-                            data-index="{{ item.index | plus: 1 }}"
-                            {% assign can_remove = item.instructions.can_remove | default: true %}
-                            {% if can_remove == false %}
-                              class="hidden"
-                            {% endif %}
-                          >
-                            <a
-                              href="{{ item.url_to_remove }}"
-                              class="button button--tertiary"
-                              aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}"
+                            <cart-remove-button
+                              id="Remove-{{ item.index | plus: 1 }}"
+                              data-index="{{ item.index | plus: 1 }}"
+                              {% assign can_remove = item.instructions.can_remove | default: true %}
+                              {% if can_remove == false %}
+                                class="hidden"
+                              {% endif %}
                             >
-                              <span class="svg-wrapper">
-                                {{- 'icon-remove.svg' | inline_asset_content -}}
-                              </span>
-                            </a>
-                          </cart-remove-button>
+                              <a
+                                href="{{ item.url_to_remove }}"
+                                class="button button--tertiary"
+                                aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}"
+                              >
+                                <span class="svg-wrapper">
+                                  {{- 'icon-remove.svg' | inline_asset_content -}}
+                                </span>
+                              </a>
+                            </cart-remove-button>
+                          </div>
                         </div>
                         {%- if has_qty_rules or has_vol_pricing -%}
                           <button

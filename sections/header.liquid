@@ -99,6 +99,11 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Allow cart badge to extend beyond header */
+.site-header {
+  overflow: visible !important;
+}
+
 /* Sticky header */
 header.header, .shopify-section-header { position: sticky; top: 0; z-index: 40; }
 
@@ -115,7 +120,7 @@ header.header, .shopify-section-header { position: sticky; top: 0; z-index: 40; 
   margin: 0 auto;
   padding: 0 24px;
   box-sizing: border-box;
-  overflow-x: hidden;
+  overflow: visible !important;
 }
 
 /* Ensure all elements respect viewport */
@@ -221,36 +226,56 @@ img, video, iframe {
   .header__icon--search, .header__icon--cart, .icon-btn { border:0; } 
 }
 
-/* Cart badge styling */
+/* Cart badge styling - ensure no cutoff */
 .header__icon--cart {
-  position: relative;
+  position: relative !important;
   overflow: visible !important;
 }
 
 .cart-badge {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #F7E06A;
-  color: #111;
-  min-width: 20px;
-  height: 20px;
-  line-height: 20px;
-  padding: 0 6px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-  text-align: center;
-  z-index: 10;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute !important;
+  top: -10px !important;
+  right: -10px !important;
+  background: #F7E06A !important;
+  color: #111 !important;
+  min-width: 22px !important;
+  height: 22px !important;
+  line-height: 22px !important;
+  padding: 0 7px !important;
+  border-radius: 999px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  z-index: 100 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
 }
 
-/* Ensure header CTAs don't clip the badge */
+/* Ensure all parent containers don't clip the badge */
 .header-ctas {
   overflow: visible !important;
-  z-index: 1;
+  z-index: 50 !important;
+}
+
+.header-row {
+  overflow: visible !important;
+}
+
+.site-header .container {
+  overflow: visible !important;
+}
+
+@media (max-width: 989px) {
+  .header-ctas {
+    overflow: visible !important;
+  }
+  
+  .cart-badge {
+    top: -8px !important;
+    right: -8px !important;
+  }
 }
 </style>
 
