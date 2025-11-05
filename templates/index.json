@@ -54,7 +54,7 @@
         "text_align": "center",
         "image_max": 1000,
         "button_align": "left",
-        "hover_zoom": true
+        "hover_zoom": false
       }
     }
   },

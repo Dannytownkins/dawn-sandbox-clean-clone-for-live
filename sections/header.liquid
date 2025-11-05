@@ -125,15 +125,50 @@ header.header, .shopify-section-header { position: sticky; top: 0; z-index: 40; 
 .ast-drawer__menu a:hover{ background:rgba(255,255,255,.08) }
 .ast-sub{ list-style:none; padding-left:12px; margin:6px 0 0; display:grid; gap:6px; }
 
+/* Header CTA icons */
+.header-ctas {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* Mobile visibility */
 @media (max-width: 989px){
   .ast-hamburger{ display:flex }
   .header__inline-menu, .list-menu--inline{ display:none !important; }
+  
+  /* Even spacing for mobile icons */
+  .header-ctas {
+    gap: 4px;
+  }
+  
+  .header__icon--search, 
+  .header__icon--cart, 
+  .icon-btn,
+  .ast-hamburger { 
+    width: 44px !important; 
+    height: 44px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+  }
 }
 
-/* Optional: style tweak for mobile icons */
-.header__icon--search, .header__icon--cart{ display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border:1px solid #111; border-radius:12px; margin-left:8px; color:#fff }
-@media (min-width: 990px){ .header__icon--search, .header__icon--cart{ border:0; } }
+/* Desktop icon styles */
+.header__icon--search, .header__icon--cart, .icon-btn { 
+  display:inline-flex; 
+  align-items:center; 
+  justify-content:center; 
+  width:44px; 
+  height:44px; 
+  border:1px solid #111; 
+  border-radius:12px; 
+  color:#fff;
+}
+@media (min-width: 990px){ 
+  .header__icon--search, .header__icon--cart, .icon-btn { border:0; } 
+}
 </style>
 
 <script>

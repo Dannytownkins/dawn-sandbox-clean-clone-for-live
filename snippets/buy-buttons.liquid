@@ -42,11 +42,38 @@
         {%- form 'product', product, id: product_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" class="product-variant-id">
 
-        <div class="product-form__quantity">
-          {% render 'quantity-input', form: form %}
-        </div>
+        <style>
+          .product-form__qty-atc-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 16px;
+          }
+          .product-form__qty-atc-wrapper .product-form__quantity {
+            flex: 0 0 auto;
+            min-width: 120px;
+          }
+          .product-form__qty-atc-wrapper .product-form__submit {
+            flex: 1 1 auto;
+            min-height: 44px;
+          }
+          @media screen and (max-width: 749px) {
+            .product-form__qty-atc-wrapper {
+              flex-direction: column;
+              gap: 10px;
+            }
+            .product-form__qty-atc-wrapper .product-form__quantity,
+            .product-form__qty-atc-wrapper .product-form__submit {
+              width: 100%;
+            }
+          }
+        </style>
 
-        <div class="product-form__buttons">
+        <div class="product-form__qty-atc-wrapper">
+          <div class="product-form__quantity">
+            {% render 'quantity-input', form: form %}
+          </div>
+
           <button
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
@@ -60,6 +87,9 @@
               </svg>
             </div>
           </button>
+        </div>
+
+        <div class="product-form__buttons">
           {{ form | payment_button }}
         </div>
         {%- endform -%}
