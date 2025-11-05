@@ -102,10 +102,46 @@
 
 <style>
 /* ===== CART DRAWER SCOPED STYLES ===== */
+
+/* Fix scroll lock */
+body.drawer-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
 /* Dark theme base */
 #cart-drawer, .cart-drawer {
   color: #fff;
   background: #0a0a0a;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  touch-action: none !important;
+}
+
+/* Overlay fix */
+.cart-drawer__overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,0.6) !important;
+  backdrop-filter: blur(3px) !important;
+  touch-action: none !important;
+}
+
+/* Panel should be scrollable */
+.cart-drawer__panel {
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: min(420px, 92vw) !important;
+  background: #0b0b0c !important;
+  display: flex !important;
+  flex-direction: column !important;
+  touch-action: pan-y !important;
+  overflow: hidden !important;
 }
 #cart-drawer *, .cart-drawer * {
   color: inherit;
@@ -262,12 +298,53 @@
   color: #fff;
 }
 
-/* Drawer content spacing */
+/* Header fix for mobile tap target */
+#cart-drawer .cart-drawer__header,
+.cart-drawer .cart-drawer__header {
+  flex-shrink: 0 !important;
+  padding: 1rem 1.5rem !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+#cart-drawer .cart-drawer__close,
+.cart-drawer .cart-drawer__close {
+  all: unset !important;
+  cursor: pointer !important;
+  padding: 12px !important;
+  margin: -8px -8px -8px 8px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 8px !important;
+  background: rgba(255,255,255,0.1) !important;
+  transition: background 0.2s !important;
+}
+
+#cart-drawer .cart-drawer__close:hover,
+#cart-drawer .cart-drawer__close:active,
+.cart-drawer .cart-drawer__close:hover,
+.cart-drawer .cart-drawer__close:active {
+  background: rgba(255,255,255,0.2) !important;
+}
+
+#cart-drawer .cart-drawer__close svg,
+.cart-drawer .cart-drawer__close svg {
+  width: 24px !important;
+  height: 24px !important;
+  stroke-width: 2.5 !important;
+}
+
+/* Drawer body - proper scroll container */
 #cart-drawer .cart-drawer__body,
 .cart-drawer .cart-drawer__body {
-  padding: 12px 16px;
-  overflow-y: auto;
-  max-height: calc(100vh - 80px);
+  flex: 1 !important;
+  padding: 12px 16px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
 }
 
 /* Cart line items - remove white dividers */
