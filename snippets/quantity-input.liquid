@@ -21,11 +21,10 @@
     class="quantity__input"
     data-quantity-variant-id="{{ variant.id }}"
     type="number"
-    name="updates[{{ variant_id }}]"
+    name="quantity"
     {% # theme-check-disable %}
-    value="{{ cart | item_count_for_variant: variant.id }}"
-    data-cart-quantity="{{ cart | item_count_for_variant: variant.id }}"
-    min="{{ min }}"
+    value="1"
+    min="1"
     data-min="{{ variant.quantity_rule.min }}"
     {% if variant.quantity_rule.max != null %}
       max="{{ variant.quantity_rule.max }}"
