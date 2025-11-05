@@ -155,27 +155,33 @@ img, video, iframe {
   .ast-hamburger{ display:flex }
   .header__inline-menu, .list-menu--inline{ display:none !important; }
   
-  /* Restructure mobile header layout */
+  /* Mobile header uses grid layout */
   .header-row {
-    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Logo stays left */
+  .logo {
+    grid-column: 1;
+    justify-self: start;
   }
   
   /* Center the 3 icons (search, account, cart) */
   .header-ctas {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    grid-column: 2;
+    justify-self: center;
     gap: 12px;
     display: flex;
     align-items: center;
   }
   
-  /* Hamburger stays right-aligned */
+  /* Hamburger stays right */
   .ast-hamburger {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    grid-column: 3;
+    justify-self: end;
   }
   
   .header__icon--search, 
