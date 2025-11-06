@@ -2,9 +2,30 @@
   <div class="inner">Added to cart <span class="title"></span>. <a href="/cart">View cart</a></div>
 </div>
 <style>
-.atc-toast{position:fixed;left:50%;transform:translate(-50%,10px);bottom:20px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;z-index:70;box-shadow:0 10px 30px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .2s, transform .2s}
-.atc-toast.show{opacity:1; pointer-events:auto; transform:translate(-50%,0)}
-.atc-toast .inner a{color:#F7E06A; margin-left:8px}
+.atc-toast {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 10px);
+  bottom: 20px;
+  background: #111;
+  color: #fff;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  z-index: 70;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.atc-toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+.atc-toast .inner a {
+  color: var(--brand-yellow);
+  margin-left: var(--space-sm);
+}
 </style>
 <script>
 (function(){

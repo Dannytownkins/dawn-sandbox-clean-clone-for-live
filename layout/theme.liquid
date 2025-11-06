@@ -12,12 +12,22 @@
     <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     <link rel="preconnect" href="https://monorail-edge.shopifysvc.com" crossorigin>
 
-    <!-- Nudge the first hero image to be LCP -->
+    <!-- Optimized LCP image detection - runs immediately -->
     <script>
-      document.addEventListener('DOMContentLoaded', function(){
-        var hero = document.querySelector('main .banner img, .slideshow__image img, .hero img, .banner__media img');
-        if (hero) { hero.setAttribute('fetchpriority','high'); hero.setAttribute('loading','eager'); }
-      });
+      (function() {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', setLCPPriority);
+        } else {
+          setLCPPriority();
+        }
+        function setLCPPriority() {
+          const hero = document.querySelector('main .banner img, .slideshow__image img, .hero img, .banner__media img, .product__media img:first-of-type');
+          if (hero) {
+            hero.setAttribute('fetchpriority', 'high');
+            hero.setAttribute('loading', 'eager');
+          }
+        }
+      })();
     </script>
 
     {%- if settings.favicon != blank -%}
@@ -68,9 +78,9 @@
 
     {% style %}
       {{ settings.type_body_font | font_face: font_display: 'swap' }}
-      {{ body_font_bold | font_face: font_display: 'swap' }}
-      {{ body_font_italic | font_face: font_display: 'swap' }}
-      {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+      {% if body_font_bold %}{{ body_font_bold | font_face: font_display: 'swap' }}{% endif %}
+      {% if body_font_italic %}{{ body_font_italic | font_face: font_display: 'swap' }}{% endif %}
+      {% if body_font_bold_italic %}{{ body_font_bold_italic | font_face: font_display: 'swap' }}{% endif %}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
       {% assign scheme_classes = '' %}
@@ -406,22 +416,19 @@
     {%- endif -%}
 
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
+      // Header scroll detection - lightweight, runs early
+      (function() {
         const headerWrapper = document.querySelector('.header-wrapper');
         if (!headerWrapper) return;
         const observer = new IntersectionObserver(([entry]) => {
           headerWrapper.classList.toggle('header--scrolled', !entry.isIntersecting);
-        });
+        }, { rootMargin: '-1px 0px 0px 0px' });
         const sentinel = document.createElement('div');
         sentinel.setAttribute('data-header-sentinel', '');
         headerWrapper.before(sentinel);
         observer.observe(sentinel);
-      });
+      })();
     </script>
-
-    {% render 'analytics-hooks' %}
-    {% render 'cart-drawer' %}
-    <script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
     <script src="{{ 'product-atc.js' | asset_url }}" defer></script>
     <script src="{{ 'atc-fallback.js' | asset_url }}" defer></script>
     <script src="{{ 'cart.js' | asset_url }}" defer></script>
