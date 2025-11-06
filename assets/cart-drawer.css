@@ -3,8 +3,19 @@
  * Fixed to right side, dark background, white text, smooth overlay, responsive sizing
  */
 
-.cart-drawer[hidden] {
+.cart-drawer[hidden],
+#cart-drawer[hidden],
+#CartDrawer[hidden],
+div#cart-drawer[hidden],
+div#cart-drawer[hidden].cart-drawer {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
 }
 
 .cart-drawer,
