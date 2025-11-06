@@ -184,11 +184,14 @@
       
       console.log(`Image variant sync: Found variant ${variant.id} with options:`, variant.options);
 
-      // Small delay to ensure previous variant change has finished
+      // Wait a bit longer to ensure previous variant change has finished and DOM is stable
       setTimeout(() => {
-        // Select the variant by setting option values
-        selectVariantByOptions(freshVariantSelects, variant, product);
-      }, 100);
+        // Re-query again right before selecting to ensure we have the latest DOM state
+        const latestVariantSelects = sectionId ? document.querySelector(`variant-selects[data-section="${sectionId}"]`) : freshVariantSelects;
+        if (latestVariantSelects) {
+          selectVariantByOptions(latestVariantSelects, variant, product);
+        }
+      }, 200);
     };
 
     // Attach listeners to thumbnails using event delegation
@@ -358,21 +361,38 @@
           // Check if this radio button matches the value we want
           const inputValue = (input.value || '').trim();
           const inputName = (input.name || '').trim();
-          const matches = inputValue.toLowerCase() === valueTrimmed.toLowerCase() || inputValue === valueTrimmed;
+          const valueLower = valueTrimmed.toLowerCase();
+          const inputValueLower = inputValue.toLowerCase();
+          const matches = inputValueLower === valueLower || inputValue === valueTrimmed;
           
           if (matches) {
-            console.log(`Image variant sync: Found matching RADIO ${inputName} with value ${inputValue} (currently ${input.checked ? 'checked' : 'unchecked'})`);
+            console.log(`Image variant sync: Found matching RADIO ${inputName} with value "${inputValue}" (looking for "${valueTrimmed}", currently ${input.checked ? 'checked' : 'unchecked'})`);
             if (!input.checked) {
+              // First uncheck all radios in the same group
+              const radiosWithSameName = freshVariantSelects.querySelectorAll(`input[type="radio"][name="${CSS.escape(inputName)}"]`);
+              radiosWithSameName.forEach(radio => {
+                if (radio !== input && radio.checked) {
+                  radio.checked = false;
+                }
+              });
+              
               // Click the radio button directly to trigger all Shopify handlers
               input.click();
               // Also set checked and dispatch change as backup
               input.checked = true;
-              input.dispatchEvent(new Event('change', { bubbles: true }));
-              input.dispatchEvent(new Event('input', { bubbles: true }));
+              
+              // Use a more complete event to trigger Shopify's handlers
+              const changeEvent = new Event('change', { bubbles: true, cancelable: true });
+              input.dispatchEvent(changeEvent);
+              
+              const inputEvent = new Event('input', { bubbles: true, cancelable: true });
+              input.dispatchEvent(inputEvent);
+              
               optionSet = true; // Stop after first match
-              break; // Exit the forEach loop
+              break; // Exit the for loop
             } else {
               // Already checked, but still mark as set
+              console.log(`Image variant sync: Radio already checked, skipping`);
               optionSet = true;
               break;
             }
