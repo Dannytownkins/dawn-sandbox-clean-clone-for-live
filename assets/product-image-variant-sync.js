@@ -333,12 +333,14 @@
           const inputValue = (input.value || '').trim();
           const matches = inputValue.toLowerCase() === valueTrimmed.toLowerCase() || inputValue === valueTrimmed;
           
-          if (matches) {
+          if (matches && !input.checked) {
             console.log(`Image variant sync: Setting RADIO ${input.name} to ${input.value} (was ${input.checked ? 'checked' : 'unchecked'})`);
-            if (!input.checked) {
-              input.checked = true;
-              input.dispatchEvent(new Event('change', { bubbles: true }));
-            }
+            // Click the radio button directly to trigger all Shopify handlers
+            input.click();
+            // Also set checked and dispatch change as backup
+            input.checked = true;
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            input.dispatchEvent(new Event('input', { bubbles: true }));
           }
         }
       });
