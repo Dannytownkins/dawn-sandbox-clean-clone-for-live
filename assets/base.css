@@ -4023,9 +4023,17 @@ section[id*="related"],
 /* ===== Section spacing rhythm ===== */
 .section { padding-block: clamp(20px, 5vw, 48px); }
 
-/* Cart drawer styles - REMOVED: Moved to assets/cart-drawer.css */
+/* Grid spacing variables - consolidated single definition */
+:root {
+  --grid-desktop-horizontal-spacing: 16px;
+  --grid-desktop-vertical-spacing: 24px;
+  --grid-mobile-horizontal-spacing: 12px;
+  --grid-mobile-vertical-spacing: 18px;
+}
 
-/* Collection/product cards - consolidated below */
+/* Trim card text spacing */
+.card-information{ row-gap: .25rem; }
+.card-information__text{ margin: 0; }
 
 /* Softer cart overlay, no heavy blur */
 .cart-notification, .drawer {
@@ -4052,12 +4060,17 @@ body.cart-open main {
   }
 }
 
-/* Card media sane aspect + no murder-crop */
+/* Card media - portrait tee shape for general cards */
 .card__media img {
   width: 100%;
   height: 100%;
   object-fit: contain;   /* show full tee */
   aspect-ratio: 3 / 4;   /* portrait tee shape */
+}
+
+/* Collection cards use cover for better visual consistency */
+.template-collection .card--product .media > img {
+  object-fit: cover;
 }
 
 /* Keep product images from overflowing giant */
@@ -4162,18 +4175,7 @@ h3{font-size:var(--step-1)}
   .product-form__buttons{ z-index: 5; }
 }
 
-/* Grid tightening */
-:root{
-  --grid-desktop-horizontal-spacing: 16px;
-  --grid-desktop-vertical-spacing: 24px;
-  --grid-mobile-horizontal-spacing: 12px;
-  --grid-mobile-vertical-spacing: 18px;
-}
-.card-information{ row-gap: .25rem; }
-.card-information__text{ margin: 0; }
-
-/* Page width - single definition */
-:root{ --page-width: 1100px; }
+/* Grid spacing variables - consolidated (defined above) */
 
 /* Center short rows (when you only have 1–2 products in a grid) */
 .grid{ justify-content: center; }

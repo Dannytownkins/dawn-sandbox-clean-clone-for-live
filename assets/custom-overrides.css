@@ -1,11 +1,13 @@
 /* --- Product card sizing + media fit --- */
-.card__media img,
-.card__inner .media img { object-fit: contain !important; }
+/* Note: Collection cards use cover, general cards use contain */
+.card__media img:not(.template-collection .card__media img),
+.card__inner .media img:not(.template-collection .card__inner .media img) {
+  object-fit: contain !important;
+}
 
-/* 2-up grids for home featured + collections (desktop) */
+/* 2-up grids for home featured collections (desktop) - consolidated */
 @media (min-width: 990px) {
-  .section-featured-collection .grid,
-  .template-collection .product-grid .grid {
+  .section-featured-collection .grid {
     grid-template-columns: repeat(2, minmax(0,1fr)) !important;
     gap: 2.5rem !important;
   }
