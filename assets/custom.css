@@ -20,79 +20,10 @@
   margin-left: 0.5rem;
 }
 
-/* Bigger product tiles in collection */
-.template-collection .card--product .media {
-  padding-top: 120% !important; /* taller image area */
-}
+/* Collection card media - REMOVED: Consolidated in base.css */
+/* Center product title + price - REMOVED: Consolidated in base.css */
 
-/* Center product title + price under images */
-.card--product .card__information {
-  text-align: center;
-}
-
-/* ===== RELATED PRODUCTS: Match main product image size ===== */
-.related-products {
-  padding: 2rem 0 !important;
-}
-
-.related-products .product-grid {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 2rem !important;
-  width: 100% !important;
-  max-width: 600px !important;
-  margin: 0 auto !important;
-}
-
-.related-products .grid__item {
-  max-width: none !important;
-  margin: 0 !important;
-  width: 100% !important;
-}
-
-.related-products .card-wrapper {
-  max-width: none !important;
-  margin: 0 !important;
-  width: 100% !important;
-}
-
-.related-products .card--product {
-  max-width: none !important;
-  width: 100% !important;
-}
-
-.related-products .card--product .card__inner {
-  max-width: none !important;
-  width: 100% !important;
-}
-
-.related-products .card--product .card__inner .media {
-  padding-top: 100% !important;
-  width: 100% !important;
-  height: auto !important;
-  position: relative !important;
-}
-
-.related-products .card--product .media img {
-  object-fit: cover !important;
-  width: 100% !important;
-  height: 100% !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-}
-
-@media (min-width: 750px) {
-  .related-products .product-grid {
-    max-width: 700px !important;
-  }
-}
-
-@media (min-width: 990px) {
-  .related-products .product-grid {
-    max-width: 800px !important;
-  }
-}
+/* Related products styles - REMOVED: Consolidated in base.css */
 
 /* Ensure header icons inherit the header foreground color, not forced white */
 .header__icon,
