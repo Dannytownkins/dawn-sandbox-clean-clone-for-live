@@ -25,13 +25,7 @@
 
 /* Related products styles - REMOVED: Consolidated in base.css */
 
-/* Ensure header icons inherit the header foreground color, not forced white */
-.header__icon,
-.header__icon svg {
-  color: rgba(var(--color-foreground), 1) !important;
-  fill: currentColor !important;
-  stroke: currentColor !important;
-}
+/* Header icons - REMOVED: Consolidated in component-ux-fixes.css */
 
 /* --- Fix Pack v2 --- */
 
