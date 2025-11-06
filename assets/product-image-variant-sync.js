@@ -246,23 +246,41 @@
 
     console.log('Image variant sync: Selecting variant with options:', optionValues, 'product options:', productOptions);
 
-    // Get all option inputs/selects
-    const optionInputs = Array.from(variantSelects.querySelectorAll('select[name^="options"], input[name^="options"]:not([type="hidden"])'));
+    // Get all option inputs/selects - handle both "options[...]" and "Color-1", "Size-2" formats
+    const optionInputs = Array.from(variantSelects.querySelectorAll('select[name^="options"], input[name^="options"]:not([type="hidden"]), input[type="radio"], select'));
     
     console.log('Image variant sync: Found option inputs:', optionInputs.length);
     
-    // Group inputs by their option index (based on name attribute)
+    // Group inputs by their option index (based on name attribute or option name)
     const inputsByIndex = {};
     optionInputs.forEach(input => {
-      const name = input.name || input.getAttribute('name');
+      const name = (input.name || input.getAttribute('name') || '').trim();
       if (!name) return;
       
-      // Extract option name from name like "options[Color]" or "options[Size]"
-      const match = name.match(/options\[([^\]]+)\]/);
-      if (!match) return;
+      // Try to match "options[Color]" or "options[Size]" format
+      let optionName = null;
+      let optionIndex = -1;
       
-      const optionName = match[1];
-      const optionIndex = productOptions.findIndex(opt => opt === optionName);
+      const optionsMatch = name.match(/options\[([^\]]+)\]/);
+      if (optionsMatch) {
+        optionName = optionsMatch[1];
+        optionIndex = productOptions.findIndex(opt => opt === optionName);
+      } else {
+        // Try to match "Color-1", "Size-2" format (Dawn theme format)
+        // Extract option name from name like "Color-1" or "Size-2"
+        const nameMatch = name.match(/^([A-Za-z]+)-\d+/);
+        if (nameMatch) {
+          optionName = nameMatch[1];
+          // Find matching option index by comparing option names
+          optionIndex = productOptions.findIndex(opt => {
+            const optLower = opt.toLowerCase();
+            const nameLower = optionName.toLowerCase();
+            return optLower === nameLower || 
+                   optLower.includes(nameLower) || 
+                   nameLower.includes(optLower);
+          });
+        }
+      }
       
       if (optionIndex >= 0 && optionIndex < optionValues.length) {
         if (!inputsByIndex[optionIndex]) {
@@ -308,16 +326,18 @@
           }
         } else if (input.type === 'radio') {
           // Find and check the radio button
-          const name = input.name || input.getAttribute('name');
-          const radio = variantSelects.querySelector(
-            `input[type="radio"][name="${name}"][value="${value}"]`
+          const name = (input.name || input.getAttribute('name') || '').trim();
+          
+          // Try exact value match first
+          let radio = variantSelects.querySelector(
+            `input[type="radio"][name="${CSS.escape(name)}"][value="${CSS.escape(value)}"]`
           );
           
           if (!radio) {
-            // Try case-insensitive match
-            const allRadios = variantSelects.querySelectorAll(`input[type="radio"][name="${name}"]`);
+            // Try case-insensitive match - get all radios with same name
+            const allRadios = variantSelects.querySelectorAll(`input[type="radio"][name="${CSS.escape(name)}"]`);
             const matchedRadio = Array.from(allRadios).find(r => {
-              const rValue = r.value.trim();
+              const rValue = (r.value || '').trim();
               const vValue = value.trim();
               return rValue.toLowerCase() === vValue.toLowerCase() ||
                      rValue === vValue;
