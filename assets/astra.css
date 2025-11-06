@@ -208,104 +208,8 @@ textarea:focus-visible {
 }
 
 /* ========================================================================
-   Cart Drawer
+   Cart Drawer - REMOVED: Styles moved to assets/cart-drawer.css
    ======================================================================== */
-
-.cart-drawer {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-}
-
-.cart-drawer[hidden] {
-  display: none;
-}
-
-.cart-drawer__overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-
-.cart-drawer__panel {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: min(420px, 90vw);
-  background: #fff;
-  color: #111;
-  box-shadow: -6px 0 24px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-}
-
-.cart-drawer__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.cart-drawer__heading {
-  font-size: var(--step-1);
-  font-weight: 800;
-  margin: 0;
-}
-
-.cart-drawer__close {
-  all: unset;
-  cursor: pointer;
-  padding: 0.5rem;
-  margin: -0.5rem -0.5rem -0.5rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  transition: color 0.2s ease;
-}
-
-.cart-drawer__close:hover {
-  color: #111;
-}
-
-.cart-drawer__body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1rem 1.5rem;
-}
-
-.cart-drawer__empty {
-  text-align: center;
-  padding: 3rem 1rem;
-}
-
-.cart-drawer__empty p {
-  margin-bottom: 1.5rem;
-  color: #666;
-}
-
-.cart-drawer__items {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.cart-line {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.cart-line__image {
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
 
 .cart-line__body {
   flex: 1;
@@ -601,17 +505,5 @@ textarea:focus-visible {
 }
 
 /* ========================================================================
-   Cart Drawer Styles
+   Cart Drawer Styles - REMOVED: Styles moved to assets/cart-drawer.css
    ======================================================================== */
-
-.cart-drawer[hidden]{ display:none !important; }
-.cart-drawer { position:fixed; inset:0; z-index:70; }
-.cart-drawer__overlay { position:absolute; inset:0; background:rgba(0,0,0,.15) !important; }
-.cart-drawer__panel {
-  position:absolute; right:0; top:0; bottom:0;
-  width:min(420px, 92vw);
-  background:#0b0b0c; color:#fff;
-  box-shadow:-12px 0 32px rgba(0,0,0,.35);
-  padding:16px; outline: none;
-}
-.cart-drawer__close { all:unset; cursor:pointer; font-size:26px; line-height:1; padding:8px; border-radius:10px; }

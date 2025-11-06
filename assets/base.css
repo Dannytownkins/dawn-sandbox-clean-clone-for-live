@@ -3720,19 +3720,7 @@ html.cart-open, html.cart-open body {
   overflow: hidden;
 }
 
-/* Ensure the drawer and overlay sit above everything */
-.cart-drawer,
-.cart-drawer__overlay,
-.modal__overlay {
-  z-index: 9999 !important;
-}
-
-/* Dimmer polish */
-.cart-drawer__overlay,
-.modal__overlay {
-  background: rgba(0,0,0,.6);
-  backdrop-filter: blur(2px);
-}
+/* Cart drawer z-index - REMOVED: Moved to assets/cart-drawer.css */
 
 /* Make sure sticky header sits below the drawer */
 .shopify-section-header-sticky {
@@ -4052,23 +4040,7 @@ section[id*="related"],
 /* ===== Section spacing rhythm ===== */
 .section { padding-block: clamp(20px, 5vw, 48px); }
 
-/* Lock scroll only while drawer is open */
-html.cart-open, html.cart-open body { overflow: hidden; }
-
-/* Drawer/overlay z-index sane */
-.cart-drawer,
-.cart-drawer__overlay,
-.modal__overlay { z-index: 9999 !important; }
-
-/* Hide overlay on the full cart page, always */
-body.template-cart .cart-drawer__overlay { display: none !important; }
-body.template-cart html, body.template-cart body { overflow: auto !important; }
-
-/* Subtle blur and dim */
-.cart-drawer__overlay, .modal__overlay {
-  background: rgba(0,0,0,.6);
-  backdrop-filter: blur(2px);
-}
+/* Cart drawer styles - REMOVED: Moved to assets/cart-drawer.css */
 
 /* Collection/product cards — comfortable size */
 .template-collection .product-grid { gap: 18px; }
@@ -4178,23 +4150,7 @@ h3{font-size:var(--step-1)}
 .button{font-weight:700;border-radius:var(--radius-pill);transition:transform .06s ease, box-shadow .2s}
 .button:active{transform:translateY(1px)}
 .button--primary{box-shadow:0 10px 24px rgba(255,225,105,.25)}
-/* Cart drawer: ensure it sits above the overlay and is clickable */
-.cart-drawer,
-#CartDrawer,
-aside[aria-labelledby="cart-drawer"] {
-  z-index: 9999 !important;
-}
-
-/* Overlay should not eat clicks while still showing a dim */
-.cart-drawer__overlay,
-.drawer__overlay,
-#CartDrawer-Overlay,
-#CartOverlay,
-.cart-overlay,
-.overlay {
-  pointer-events: none !important;
-  opacity: 0.35 !important; /* keep the blur/dim visual without blocking */
-}
+/* Cart drawer z-index - REMOVED: Moved to assets/cart-drawer.css */
 /* --- Sticky ATC on mobile --- */
 @media screen and (max-width: 749px){
   .product__info-wrapper .product-form__buttons{
