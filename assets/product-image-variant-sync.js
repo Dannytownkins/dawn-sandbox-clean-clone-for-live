@@ -305,8 +305,10 @@
       const valueTrimmed = value.trim();
       let optionSet = false;
       
-      inputs.forEach(input => {
-        if (optionSet) return; // Stop after first match for radio buttons
+      // Use a for loop instead of forEach so we can break properly
+      for (let i = 0; i < inputs.length; i++) {
+        const input = inputs[i];
+        if (optionSet) break; // Stop after first match for radio buttons
         
         if (input.tagName === 'SELECT') {
           // Find and select the option
@@ -335,20 +337,28 @@
         } else if (input.type === 'radio') {
           // Check if this radio button matches the value we want
           const inputValue = (input.value || '').trim();
+          const inputName = (input.name || '').trim();
           const matches = inputValue.toLowerCase() === valueTrimmed.toLowerCase() || inputValue === valueTrimmed;
           
-          if (matches && !input.checked) {
-            console.log(`Image variant sync: Setting RADIO ${input.name} to ${input.value} (was ${input.checked ? 'checked' : 'unchecked'})`);
-            // Click the radio button directly to trigger all Shopify handlers
-            input.click();
-            // Also set checked and dispatch change as backup
-            input.checked = true;
-            input.dispatchEvent(new Event('change', { bubbles: true }));
-            input.dispatchEvent(new Event('input', { bubbles: true }));
-            optionSet = true; // Stop after first match
+          if (matches) {
+            console.log(`Image variant sync: Found matching RADIO ${inputName} with value ${inputValue} (currently ${input.checked ? 'checked' : 'unchecked'})`);
+            if (!input.checked) {
+              // Click the radio button directly to trigger all Shopify handlers
+              input.click();
+              // Also set checked and dispatch change as backup
+              input.checked = true;
+              input.dispatchEvent(new Event('change', { bubbles: true }));
+              input.dispatchEvent(new Event('input', { bubbles: true }));
+              optionSet = true; // Stop after first match
+              break; // Exit the forEach loop
+            } else {
+              // Already checked, but still mark as set
+              optionSet = true;
+              break;
+            }
           }
         }
-      });
+      }
     });
   }
 
