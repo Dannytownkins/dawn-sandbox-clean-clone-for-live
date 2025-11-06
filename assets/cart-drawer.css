@@ -42,8 +42,8 @@ div#cart-drawer.cart-drawer {
 .cart-drawer__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.3); /* Reduced from 0.45 to 0.3 */
+  backdrop-filter: blur(2px); /* Reduced blur */
 }
 
 .cart-drawer__panel {
