@@ -12,7 +12,16 @@ window.CartDrawer = {
     if (!this.drawer) return;
 
     this.setupEventListeners();
+    this.enforceRightPositioning();
     this.refresh();
+    
+    // Watch for drawer visibility changes to re-apply positioning
+    const observer = new MutationObserver(() => {
+      if (!this.drawer.hasAttribute('hidden')) {
+        setTimeout(() => this.enforceRightPositioning(), 0);
+      }
+    });
+    observer.observe(this.drawer, { attributes: true, attributeFilter: ['hidden'] });
   },
 
   setupEventListeners() {
@@ -61,15 +70,17 @@ window.CartDrawer = {
     this.drawer.setAttribute('aria-hidden', 'false');
     this.isOpen = true;
 
-    // Force right positioning
-    this.drawer.style.left = 'auto';
-    this.drawer.style.right = '0';
-    this.drawer.style.width = '100vw';
+    // Force right positioning with !important inline styles
+    this.drawer.style.setProperty('left', 'auto', 'important');
+    this.drawer.style.setProperty('right', '0', 'important');
+    this.drawer.style.setProperty('width', '100vw', 'important');
+    this.drawer.style.setProperty('margin-left', '0', 'important');
+    this.drawer.style.setProperty('margin-right', '0', 'important');
     
     const panel = this.drawer.querySelector('.cart-drawer__panel');
     if (panel) {
-      panel.style.left = 'auto';
-      panel.style.right = '0';
+      panel.style.setProperty('left', 'auto', 'important');
+      panel.style.setProperty('right', '0', 'important');
     }
 
     // Focus management
@@ -137,6 +148,9 @@ window.CartDrawer = {
             currentBody.innerHTML = newBody.innerHTML;
           }
         }
+        
+        // Re-apply right positioning after content refresh
+        this.enforceRightPositioning();
       }
 
       // Update cart badge
@@ -169,6 +183,23 @@ window.CartDrawer = {
       });
     } catch (error) {
       console.error('Cart badge update error:', error);
+    }
+  },
+
+  enforceRightPositioning() {
+    if (!this.drawer) return;
+    
+    // Force drawer container to right with !important inline styles
+    this.drawer.style.setProperty('left', 'auto', 'important');
+    this.drawer.style.setProperty('right', '0', 'important');
+    this.drawer.style.setProperty('width', '100vw', 'important');
+    this.drawer.style.setProperty('margin-left', '0', 'important');
+    this.drawer.style.setProperty('margin-right', '0', 'important');
+    
+    const panel = this.drawer.querySelector('.cart-drawer__panel');
+    if (panel) {
+      panel.style.setProperty('left', 'auto', 'important');
+      panel.style.setProperty('right', '0', 'important');
     }
   },
 };
