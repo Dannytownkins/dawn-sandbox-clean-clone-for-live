@@ -121,6 +121,11 @@ body.drawer-open {
   touch-action: none !important;
 }
 
+/* Hide drawer when hidden attribute is present */
+#cart-drawer[hidden], .cart-drawer[hidden] {
+  display: none !important;
+}
+
 /* Overlay fix */
 .cart-drawer__overlay {
   position: absolute !important;
@@ -142,6 +147,14 @@ body.drawer-open {
   flex-direction: column !important;
   touch-action: pan-y !important;
   overflow: hidden !important;
+  transform: translateX(100%) !important;
+  transition: transform 0.3s ease !important;
+}
+
+/* Slide in from right when drawer is open */
+#cart-drawer:not([hidden]) .cart-drawer__panel,
+.cart-drawer:not([hidden]) .cart-drawer__panel {
+  transform: translateX(0) !important;
 }
 #cart-drawer *, .cart-drawer * {
   color: inherit;
