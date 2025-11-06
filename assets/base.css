@@ -3697,23 +3697,7 @@ details-disclosure > details {
 }
 
 
-/* home picks sizing */
-.section-home-picks .grid{ gap:18px }
-.section-home-picks .card-wrapper{ max-width:340px; margin-inline:auto; border-radius:14px; overflow:hidden }
-@media (min-width:990px){ .section-home-picks .card-wrapper{ max-width:360px } }
-
-/* Home featured grid — compact two-up */
-.section-home-picks .grid{ gap:18px }
-.section-home-picks .card-wrapper{
-  max-width:360px; margin-inline:auto; border-radius:14px; overflow:hidden;
-}
-@media (max-width: 989px){
-  .section-home-picks .card-wrapper{ max-width: none; }
-}
-
-/* Collection grids compact */
-.template-collection .product-grid{ gap:18px }
-.template-collection .product-grid .card-wrapper{ max-width:320px; margin-inline:auto }
+/* Home picks and collection grids - consolidated below */
 
 /* Prevent scrolling the page when cart drawer is open */
 html.cart-open, html.cart-open body {
@@ -3729,30 +3713,7 @@ html.cart-open, html.cart-open body {
 
 /* Cart drawer styles - REMOVED: Moved to assets/cart-drawer.css */
 
-/* home picks sizing by section id */
-/* Home picks section - consolidated */
-.section-home-picks .grid,
-#shopify-section-home-picks .grid {
-  gap: 18px;
-}
-.section-home-picks .card-wrapper,
-#shopify-section-home-picks .card-wrapper {
-  max-width: 340px;
-  margin-inline: auto;
-  border-radius: 14px;
-  overflow: hidden;
-}
-@media (min-width: 990px) {
-  .section-home-picks .card-wrapper,
-  #shopify-section-home-picks .card-wrapper {
-    max-width: 360px;
-  }
-}
-@media (max-width: 989px) {
-  .section-home-picks .card-wrapper {
-    max-width: none;
-  }
-}
+/* Home picks section - consolidated (see below) */
 
 /* ===== Astra tune-up — tokens ===== */
 :root{
@@ -4042,9 +4003,7 @@ section[id*="related"],
 
 /* Cart drawer styles - REMOVED: Moved to assets/cart-drawer.css */
 
-/* Collection/product cards — comfortable size */
-.template-collection .product-grid { gap: 18px; }
-.template-collection .card-wrapper { max-width: 360px; margin-inline: auto; }
+/* Collection/product cards - consolidated below */
 
 /* Softer cart overlay, no heavy blur */
 .cart-notification, .drawer {
@@ -4280,23 +4239,7 @@ h3{font-size:var(--step-1)}
 /* Ensure images fill their media box cleanly */
 .template-collection .card--product .media > img{ width:100%; height:100%; object-fit: cover; }
 
-/* Catalog grid: bigger thumbs */
-.template-collection .product-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* 2-up on desktop for larger cards */
-  gap: 28px !important;
-}
-@media (max-width: 989px){
-  .template-collection .product-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
-}
-
-/* Force square-ish media so the image area is tall and fills the card */
-.template-collection .card--product .card__inner .media { padding-top: 110% !important; } /* ~1:1.1 */
-.card--product .media img { object-fit: cover; }
-
-/* Center text under images everywhere */
-.card--product .card__content,
-.card--product .card__information {
-  text-align: center !important;
+/* Collection grid styles - consolidated below */
   align-items: center;
 }
 .card--product .price { justify-content: center; }
@@ -4365,30 +4308,7 @@ h3{font-size:var(--step-1)}
 .header--light .header__icons .header__icon,
 .header--light .header__icons .menu-drawer__trigger { color: inherit; }
 
-/* ===== Collection grid sizing ===== */
-/* Make collection cards larger: 2-up desktop, 1-up mobile */
-.template-collection .grid.product-grid {
-  grid-template-columns: repeat(2, minmax(360px, 1fr)) !important;
-  gap: 28px !important;
-}
-@media (max-width: 989px){
-  .template-collection .grid.product-grid {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-  }
-}
-/* Taller image area so thumbs look big */
-.template-collection .card--product .card__inner .media { padding-top: 120% !important; }
-.card--product .media img { object-fit: cover; }
-
-/* Center titles/prices under the image */
-.card--product .card__content,
-.card--product .card__information { text-align: center !important; align-items: center; }
-.card--product .price { justify-content: center; }
-
-/* Full-width CTA under each card */
-.card--product .card__cta { margin-top: 10px; }
-.card--product .card__cta .button { width: 100%; }
+/* Collection grid styles - consolidated below */
 
 /* Trust bar centered + one row on mobile */
 .ast-usp__inner{ display:flex; align-items:center; justify-content:center; gap:22px; min-height:44px; }
