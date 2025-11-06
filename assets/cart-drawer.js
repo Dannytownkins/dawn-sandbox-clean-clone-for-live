@@ -189,17 +189,20 @@ window.CartDrawer = {
   enforceRightPositioning() {
     if (!this.drawer) return;
     
-    // Force drawer container to right with !important inline styles
-    this.drawer.style.setProperty('left', 'auto', 'important');
-    this.drawer.style.setProperty('right', '0', 'important');
-    this.drawer.style.setProperty('width', '100vw', 'important');
-    this.drawer.style.setProperty('margin-left', '0', 'important');
-    this.drawer.style.setProperty('margin-right', '0', 'important');
+    // Force drawer container to right with direct style assignment (works better than setProperty)
+    this.drawer.style.left = 'auto';
+    this.drawer.style.right = '0';
+    this.drawer.style.width = '100vw';
+    this.drawer.style.marginLeft = '0';
+    this.drawer.style.marginRight = '0';
+    this.drawer.style.maxWidth = 'none';
+    this.drawer.style.minWidth = '100vw';
+    this.drawer.style.display = 'block';
     
     const panel = this.drawer.querySelector('.cart-drawer__panel');
     if (panel) {
-      panel.style.setProperty('left', 'auto', 'important');
-      panel.style.setProperty('right', '0', 'important');
+      panel.style.left = 'auto';
+      panel.style.right = '0';
     }
   },
 };
