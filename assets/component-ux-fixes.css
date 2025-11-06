@@ -18,7 +18,6 @@
   text-decoration: underline;
 }
 
-/* Button hover effects - REMOVED: Consolidated in base.css */
 
 /* Collection/catalog: larger images & tighter grid */
 .template-collection .product-grid .grid {
@@ -29,14 +28,43 @@
   aspect-ratio: 1/1;
 }
 
-/* Header/cart icons: stop the white pill & ensure visible color */
-.header__icon,
+/* Header icons: consolidated styles (loads last to override base) */
+.header__icons .header__icon,
+.header__icons .header__icon--cart,
+.header__icons .header__icon--account,
+.header__icons .header__icon--search,
+.header__icons .menu-drawer__trigger {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.header__icons .header__icon svg,
+.header__icons .menu-drawer__trigger svg {
+  width: 20px;
+  height: 20px;
+}
+
 .header__icon--cart {
   background: transparent !important;
 }
+
 .header__icons svg {
   color: rgb(var(--color-foreground));
   fill: currentColor;
+}
+
+/* When header switches to light background, inherit default color */
+.header--light .header__icons .header__icon,
+.header--light .header__icons .menu-drawer__trigger {
+  color: inherit;
 }
 
 /* Mobile menu drawer color (no washed-out white panel) */

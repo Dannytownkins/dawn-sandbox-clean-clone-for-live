@@ -2596,7 +2596,7 @@ input[type='checkbox'] {
   }
 }
 
-/* Header icons */
+/* Header icons: consolidated styles (base definitions) */
 .header__icons {
   display: flex;
   grid-area: icons;
@@ -3706,14 +3706,10 @@ html.cart-open, html.cart-open body {
   overflow: hidden;
 }
 
-/* Cart drawer z-index - REMOVED: Moved to assets/cart-drawer.css */
-
 /* Make sure sticky header sits below the drawer */
 .shopify-section-header-sticky {
   z-index: 1000;
 }
-
-/* Cart drawer styles - REMOVED: Moved to assets/cart-drawer.css */
 
 /* ===== Home Picks Section - Consolidated ===== */
 .section-home-picks .grid,
@@ -4192,7 +4188,6 @@ h3{font-size:var(--step-1)}
 .button{font-weight:700;border-radius:var(--radius-pill);transition:transform .06s ease, box-shadow .2s}
 .button:active{transform:translateY(1px)}
 .button--primary{box-shadow:0 10px 24px rgba(255,225,105,.25)}
-/* Cart drawer z-index - REMOVED: Moved to assets/cart-drawer.css */
 /* --- Sticky ATC on mobile --- */
 @media screen and (max-width: 749px){
   .product__info-wrapper .product-form__buttons{
@@ -4339,27 +4334,6 @@ h3{font-size:var(--step-1)}
 }
 
 /* Header icon reset: no pill backgrounds */
-.header__icons .header__icon,
-.header__icons .header__icon .icon,
-.header__icons .header__icon--cart,
-.header__icons .header__icon--account,
-.header__icons .header__icon--search,
-.header__icons .menu-drawer__trigger {
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}
-
-/* Make them tappable and white on dark header */
-.header__icons .header__icon,
-.header__icons .menu-drawer__trigger {
-  position: relative;
-  width: 44px; height: 44px;
-  display: inline-flex; align-items: center; justify-content: center;
-  color: #fff;
-}
-.header__icons .header__icon svg,
-.header__icons .menu-drawer__trigger svg { width: 20px; height: 20px; }
 
 /* Cart badge/bubble - consolidated clean style */
 .header__icon--cart .cart-count-bubble,
@@ -4367,7 +4341,7 @@ h3{font-size:var(--step-1)}
   position: absolute;
   top: 4px;
   right: -6px;
-  background: #F7E06A;
+  background: var(--brand-yellow);
   color: #111;
   min-width: 20px;
   height: 20px;
@@ -4400,15 +4374,6 @@ h3{font-size:var(--step-1)}
   .ast-usp__inner>*{ flex:0 0 auto; }
 }
 
-/* Header icons: remove the white "pills" */
-.header__icons .header__icon,
-.header__icons .menu-drawer__trigger{
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  color: #fff; width:44px; height:44px;
-  display:inline-flex; align-items:center; justify-content:center;
-}
 .menu-drawer__inner-container{ background:#0b0b0c; color:#fff; }
 .menu-drawer__menu-item{ color:#fff; }
 /* Collection grid - consolidated single definition */
@@ -4460,7 +4425,6 @@ h3{font-size:var(--step-1)}
 .ast-usp__inner>*{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;}
 @media (max-width:640px){.ast-usp__inner{justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;}.ast-usp__inner>*{flex:0 0 auto;}}
 
-/* MCP_HEADER_ICONS */
-.header__icons .header__icon,.header__icons .menu-drawer__trigger{background:transparent!important;border:0!important;box-shadow:none!important;color:#fff;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;position:relative;}
+/* MCP_HEADER_ICONS - consolidated in component-ux-fixes.css */
 .menu-drawer__inner-container{background:#0b0b0c;color:#fff;}
 .menu-drawer__menu-item{color:#fff;}

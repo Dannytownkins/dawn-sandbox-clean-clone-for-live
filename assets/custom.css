@@ -20,12 +20,6 @@
   margin-left: 0.5rem;
 }
 
-/* Collection card media - REMOVED: Consolidated in base.css */
-/* Center product title + price - REMOVED: Consolidated in base.css */
-
-/* Related products styles - REMOVED: Consolidated in base.css */
-
-/* Header icons - REMOVED: Consolidated in component-ux-fixes.css */
 
 /* --- Fix Pack v2 --- */
 
@@ -109,23 +103,6 @@
 }
 
 /* ---------- HEADER ICONS: no pill, pure icon ---------- */
-.header__icon,
-.header__icon .icon {
-  background: transparent !important;
-  border: 0;
-  box-shadow: none;
-}
-.header__icon {
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  color: var(--color-foreground);
-}
-.header__icon:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
-}
-
-/* Clean hamburger menu button - remove pill background */
 .ast-hamburger {
   background: transparent !important;
   border: 0 !important;
@@ -137,4 +114,3 @@
   outline-offset: 2px;
 }
 
-/* ===== CART DRAWER - REMOVED: Styles moved to assets/cart-drawer.css ===== */

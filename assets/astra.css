@@ -207,9 +207,6 @@ textarea:focus-visible {
   }
 }
 
-/* ========================================================================
-   Cart Drawer - REMOVED: Styles moved to assets/cart-drawer.css
-   ======================================================================== */
 
 .cart-line__body {
   flex: 1;
@@ -398,7 +395,7 @@ textarea:focus-visible {
   line-height: 20px;
   text-align: center;
   border-radius: 10px;
-  background: #eded6b;
+  background: var(--brand-yellow);
   color: #111;
   padding: 0 6px;
 }
@@ -504,7 +501,3 @@ textarea:focus-visible {
   background: #151518;
   color: #fff;
 }
-
-/* ========================================================================
-   Cart Drawer Styles - REMOVED: Styles moved to assets/cart-drawer.css
-   ======================================================================== */
