@@ -3713,7 +3713,29 @@ html.cart-open, html.cart-open body {
 
 /* Cart drawer styles - REMOVED: Moved to assets/cart-drawer.css */
 
-/* Home picks section - consolidated (see below) */
+/* ===== Home Picks Section - Consolidated ===== */
+.section-home-picks .grid,
+#shopify-section-home-picks .grid {
+  gap: 18px;
+}
+.section-home-picks .card-wrapper,
+#shopify-section-home-picks .card-wrapper {
+  max-width: 340px;
+  margin-inline: auto;
+  border-radius: 14px;
+  overflow: hidden;
+}
+@media (min-width: 990px) {
+  .section-home-picks .card-wrapper,
+  #shopify-section-home-picks .card-wrapper {
+    max-width: 360px;
+  }
+}
+@media (max-width: 989px) {
+  .section-home-picks .card-wrapper {
+    max-width: none;
+  }
+}
 
 /* ===== Astra tune-up — tokens ===== */
 :root{
@@ -4240,9 +4262,7 @@ h3{font-size:var(--step-1)}
 .template-collection .card--product .media > img{ width:100%; height:100%; object-fit: cover; }
 
 /* Collection grid styles - consolidated below */
-  align-items: center;
-}
-.card--product .price { justify-content: center; }
+/* Note: Actual styles are defined at end of file */
 /* Optional: center the badge if present */
 .card--product .card__badge { left: 50%; transform: translateX(-50%); }
 
