@@ -4365,8 +4365,8 @@ h3{font-size:var(--step-1)}
 .header__icon--cart .cart-count-bubble,
 .header__icon--cart .cart-badge {
   position: absolute;
-  top: 0;
-  right: -2px;
+  top: 4px;
+  right: -6px;
   background: #F7E06A;
   color: #111;
   min-width: 20px;
