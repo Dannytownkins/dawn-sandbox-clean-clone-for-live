@@ -21,6 +21,17 @@
     drawer.hidden = false;
     drawer.setAttribute('aria-hidden', 'false');
     
+    // Force right positioning
+    drawer.style.left = 'auto';
+    drawer.style.right = '0';
+    drawer.style.width = '100vw';
+    
+    const panel = drawer.querySelector('.cart-drawer__panel');
+    if (panel) {
+      panel.style.left = 'auto';
+      panel.style.right = '0';
+    }
+    
     // Lock body scroll - prevent background scrolling
     document.body.classList.add('drawer-open');
     document.body.style.overflow = 'hidden';
