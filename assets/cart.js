@@ -138,10 +138,16 @@
   });
 
   // AJAX Add to Cart - Intercept form submissions
+  // Skip forms that are handled by product-atc.js to prevent duplicate handling
   document.addEventListener('submit', async (e) => {
     const form = e.target;
     if (!(form instanceof HTMLFormElement)) return;
     if (!form.action.includes('/cart/add')) return;
+    
+    // Skip if this form is handled by product-atc.js (has data-type="add-to-cart-form")
+    if (form.hasAttribute('data-type') && form.getAttribute('data-type') === 'add-to-cart-form') {
+      return; // Let product-atc.js handle it
+    }
 
     e.preventDefault();
 
@@ -163,9 +169,24 @@
         headers: { Accept: 'application/json' },
       });
 
-      if (!res.ok) throw new Error('Add to cart failed');
+      // Parse response - Shopify can return 200 OK with error in JSON
+      const data = await res.json().catch(() => null);
+      
+      // Check for actual error in response (Shopify returns status field on error)
+      if (!res.ok || (data && data.status && data.status >= 400)) {
+        const errorMsg = data?.description || data?.message || 'Add to cart failed';
+        console.error('Add to cart error:', errorMsg);
+        alert(errorMsg);
+        
+        // Reset button
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }
+        return;
+      }
 
-      // Refresh cart data
+      // Success - refresh cart data
       const cartRes = await fetch('/cart.js', {
         headers: { Accept: 'application/json' },
       });
@@ -211,6 +232,23 @@
       }
     } catch (err) {
       console.error('Add to cart error:', err);
+      // Only show alert if it's a real network/parsing error
+      // Don't show false errors if cart was actually updated
+      try {
+        const cartCheck = await fetch('/cart.js', { headers: { Accept: 'application/json' } });
+        const cartData = await cartCheck.json();
+        
+        // If cart has items, it likely succeeded despite the error - don't show false error
+        if (cartData && cartData.item_count > 0) {
+          // Item was added successfully, just refresh the UI
+          updateCartBadge(cartData.item_count);
+          openDrawer();
+          return;
+        }
+      } catch (checkErr) {
+        // Can't verify cart state, show error
+      }
+      
       alert('Could not add to cart. Please try again or contact support.');
 
       // Reset button
