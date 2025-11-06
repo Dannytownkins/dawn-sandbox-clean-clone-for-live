@@ -111,14 +111,28 @@ body.drawer-open {
   height: 100% !important;
 }
 
-/* Dark theme base */
-#cart-drawer, .cart-drawer {
-  color: #fff;
-  background: #0a0a0a;
+/* Dark theme base - Force right positioning */
+#cart-drawer, 
+#cart-drawer.cart-drawer,
+.cart-drawer {
+  color: #fff !important;
+  background: #0a0a0a !important;
   position: fixed !important;
-  inset: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: auto !important;
+  right: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
   z-index: 9999 !important;
   touch-action: none !important;
+  display: block !important;
+}
+
+/* Override any inset: 0 rules */
+#cart-drawer[style*="left"],
+.cart-drawer[style*="left"] {
+  left: auto !important;
 }
 
 /* Hide drawer when hidden attribute is present */
@@ -126,19 +140,27 @@ body.drawer-open {
   display: none !important;
 }
 
-/* Overlay fix */
+/* Overlay fix - must be behind panel */
 .cart-drawer__overlay {
   position: absolute !important;
-  inset: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
   background: rgba(0,0,0,0.6) !important;
   backdrop-filter: blur(3px) !important;
   touch-action: none !important;
+  pointer-events: auto !important;
+  z-index: 1 !important;
 }
 
-/* Panel should be scrollable */
+/* Panel should be scrollable - Force right positioning */
+#cart-drawer .cart-drawer__panel,
+.cart-drawer .cart-drawer__panel,
 .cart-drawer__panel {
   position: absolute !important;
   right: 0 !important;
+  left: auto !important;
   top: 0 !important;
   bottom: 0 !important;
   width: min(420px, 92vw) !important;
@@ -149,6 +171,13 @@ body.drawer-open {
   overflow: hidden !important;
   transform: translateX(100%) !important;
   transition: transform 0.3s ease !important;
+  z-index: 10001 !important;
+}
+
+/* Override any inline styles or other rules */
+#cart-drawer .cart-drawer__panel[style*="left"],
+.cart-drawer .cart-drawer__panel[style*="left"] {
+  left: auto !important;
 }
 
 /* Slide in from right when drawer is open */
@@ -488,6 +517,48 @@ body.drawer-open {
 </style>
 
 <script>
+// Force cart drawer to open from the right
+(function() {
+  function enforceRightPositioning() {
+    const drawer = document.getElementById('cart-drawer');
+    if (!drawer) return;
+    
+    const panel = drawer.querySelector('.cart-drawer__panel');
+    if (!panel) return;
+    
+    // Force drawer container to right
+    drawer.style.left = 'auto';
+    drawer.style.right = '0';
+    drawer.style.width = '100vw';
+    
+    // Force panel to right
+    panel.style.left = 'auto';
+    panel.style.right = '0';
+  }
+  
+  // Apply on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enforceRightPositioning);
+  } else {
+    enforceRightPositioning();
+  }
+  
+  // Watch for drawer visibility changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'hidden') {
+        enforceRightPositioning();
+      }
+    });
+  });
+  
+  const drawer = document.getElementById('cart-drawer');
+  if (drawer) {
+    observer.observe(drawer, { attributes: true, attributeFilter: ['hidden'] });
+    enforceRightPositioning();
+  }
+})();
+
 // Update progress bar and cart totals
 function updateCartProgress(cartData) {
   const threshold = 5000; // $50.00 in cents
