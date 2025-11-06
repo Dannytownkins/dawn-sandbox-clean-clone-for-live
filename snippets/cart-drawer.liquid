@@ -111,10 +111,12 @@ body.drawer-open {
   height: 100% !important;
 }
 
-/* Dark theme base - Force right positioning */
+/* Dark theme base - Force right positioning - MAXIMUM SPECIFICITY */
 #cart-drawer, 
 #cart-drawer.cart-drawer,
-.cart-drawer {
+.cart-drawer,
+div#cart-drawer,
+div#cart-drawer.cart-drawer {
   color: #fff !important;
   background: #0a0a0a !important;
   position: fixed !important;
@@ -127,6 +129,9 @@ body.drawer-open {
   z-index: 9999 !important;
   touch-action: none !important;
   display: block !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  transform: none !important;
 }
 
 /* Override any inset: 0 rules */
@@ -517,46 +522,58 @@ body.drawer-open {
 </style>
 
 <script>
-// Force cart drawer to open from the right
+// Force cart drawer to open from the right - AGGRESSIVE ENFORCEMENT
 (function() {
   function enforceRightPositioning() {
     const drawer = document.getElementById('cart-drawer');
     if (!drawer) return;
     
     const panel = drawer.querySelector('.cart-drawer__panel');
-    if (!panel) return;
     
-    // Force drawer container to right
-    drawer.style.left = 'auto';
-    drawer.style.right = '0';
-    drawer.style.width = '100vw';
+    // Force drawer container to right with inline styles (highest priority)
+    drawer.style.setProperty('left', 'auto', 'important');
+    drawer.style.setProperty('right', '0', 'important');
+    drawer.style.setProperty('width', '100vw', 'important');
+    drawer.style.setProperty('margin-left', '0', 'important');
+    drawer.style.setProperty('margin-right', '0', 'important');
     
     // Force panel to right
-    panel.style.left = 'auto';
-    panel.style.right = '0';
+    if (panel) {
+      panel.style.setProperty('left', 'auto', 'important');
+      panel.style.setProperty('right', '0', 'important');
+    }
   }
   
-  // Apply on load
+  // Apply immediately and on various events
+  enforceRightPositioning();
+  
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', enforceRightPositioning);
-  } else {
-    enforceRightPositioning();
   }
   
-  // Watch for drawer visibility changes
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'hidden') {
-        enforceRightPositioning();
-      }
-    });
+  // Watch for drawer visibility changes and DOM mutations
+  const observer = new MutationObserver(() => {
+    enforceRightPositioning();
   });
   
   const drawer = document.getElementById('cart-drawer');
   if (drawer) {
-    observer.observe(drawer, { attributes: true, attributeFilter: ['hidden'] });
+    observer.observe(drawer, { 
+      attributes: true, 
+      attributeFilter: ['hidden', 'style', 'class'],
+      childList: true,
+      subtree: true
+    });
     enforceRightPositioning();
   }
+  
+  // Also run on any cart drawer open events
+  document.addEventListener('click', () => {
+    setTimeout(enforceRightPositioning, 0);
+  }, true);
+  
+  // Run periodically to catch any late changes
+  setInterval(enforceRightPositioning, 100);
 })();
 
 // Update progress bar and cart totals

@@ -142,13 +142,15 @@ cart-drawer-items.is-empty + .drawer__footer {
   padding-top: 1.5rem;
 }
 
-cart-drawer {
+cart-drawer,
+#cart-drawer,
+.cart-drawer {
   position: fixed !important;
   top: 0 !important;
   left: auto !important;
   right: 0 !important;
   width: 100vw !important;
-  height: 100% !important;
+  height: 100vh !important;
 }
 
 .cart-drawer__overlay {
