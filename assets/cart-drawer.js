@@ -61,6 +61,17 @@ window.CartDrawer = {
     this.drawer.setAttribute('aria-hidden', 'false');
     this.isOpen = true;
 
+    // Force right positioning
+    this.drawer.style.left = 'auto';
+    this.drawer.style.right = '0';
+    this.drawer.style.width = '100vw';
+    
+    const panel = this.drawer.querySelector('.cart-drawer__panel');
+    if (panel) {
+      panel.style.left = 'auto';
+      panel.style.right = '0';
+    }
+
     // Focus management
     const closeBtn = this.drawer.querySelector('[data-close-cart]');
     if (closeBtn) {
