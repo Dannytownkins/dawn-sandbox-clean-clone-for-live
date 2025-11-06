@@ -7,7 +7,10 @@
   display: none !important;
 }
 
-.cart-drawer {
+.cart-drawer,
+#cart-drawer,
+div#cart-drawer,
+div#cart-drawer.cart-drawer {
   position: fixed !important;
   top: 0 !important;
   bottom: 0 !important;
@@ -16,6 +19,12 @@
   width: 100vw !important;
   height: 100vh !important;
   z-index: 70 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  transform: none !important;
+  display: block !important;
+  max-width: none !important;
+  min-width: 100vw !important;
 }
 
 .cart-drawer__overlay {
