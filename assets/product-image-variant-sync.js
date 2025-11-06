@@ -180,18 +180,23 @@
       selectVariantByOptions(variantSelects, variant, product);
     };
 
-    // Attach listeners to thumbnails
-    thumbnailButtons.forEach((button) => {
-      // Remove existing listeners to avoid duplicates
-      const newButton = button.cloneNode(true);
-      button.parentNode.replaceChild(newButton, button);
-      
-      newButton.addEventListener('click', function(e) {
-        const thumbnailItem = newButton.closest('.thumbnail-list__item');
+    // Attach listeners to thumbnails using event delegation
+    // Use event delegation on the thumbnail list to avoid issues with cloned nodes
+    const thumbnailList = mediaGallery.querySelector('.thumbnail-list');
+    if (thumbnailList) {
+      thumbnailList.addEventListener('click', function(e) {
+        // Check if clicked element is a thumbnail button or inside one
+        const button = e.target.closest('.thumbnail-list__item button.thumbnail, button.thumbnail');
+        if (!button) return;
+        
+        const thumbnailItem = button.closest('.thumbnail-list__item');
         if (!thumbnailItem) return;
 
         const dataTarget = thumbnailItem.dataset.target;
-        if (!dataTarget) return;
+        if (!dataTarget) {
+          console.log('Image variant sync: No data-target found');
+          return;
+        }
 
         // Extract media ID from data-target (format: "sectionId-mediaId")
         const parts = dataTarget.split('-');
@@ -200,10 +205,10 @@
         console.log(`Image variant sync: Clicked thumbnail, data-target: ${dataTarget}, extracted mediaId: ${mediaId}`);
         
         if (mediaId) {
-          handleImageClick(newButton, mediaId);
+          handleImageClick(button, mediaId);
         }
       });
-    });
+    }
 
     // Also listen for clicks on main image items (for desktop gallery)
     mainImageItems.forEach((item) => {
