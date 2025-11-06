@@ -3727,46 +3727,7 @@ html.cart-open, html.cart-open body {
   z-index: 1000;
 }
 
-/* Drawer spacing + cards */
-.cart-drawer .cart-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
-.cart-drawer .cart-drawer__footer { padding-top: 12px; }
-
-/* Make the top free-shipping pill look intentional */
-.cart-drawer .notice--success,
-.cart-drawer .cart-free-shipping {
-  background: #F7E06A;
-  color: #111;
-  border-radius: 999px;
-  padding: 8px 12px;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.18);
-}
-
-/* Buttons unified */
-.cart-drawer .button,
-.cart-drawer .btn,
-.cart-drawer .checkout-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 18px;
-  border-radius: 999px;
-  font-weight: 700;
-  border: none;
-  background: #F7E06A;
-  color: #111;
-  box-shadow: 0 6px 18px rgba(0,0,0,.25);
-  transition: transform .12s ease, box-shadow .12s ease;
-}
-.cart-drawer .button:hover,
-.cart-drawer .btn:hover,
-.cart-drawer .checkout-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(0,0,0,.35);
-}
+/* Cart drawer styles - REMOVED: Moved to assets/cart-drawer.css */
 
 /* home picks sizing by section id */
 #shopify-section-home-picks .grid{ gap:18px }
