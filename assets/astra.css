@@ -386,10 +386,11 @@ textarea:focus-visible {
   color: #fff;
 }
 
+/* Cart badge - base style (overridden by header-specific styles) */
 .cart-badge {
   position: absolute;
-  top: -4px;
-  right: 2px;
+  top: 0;
+  right: -2px;
   min-width: 20px;
   height: 20px;
   font-size: 11px;

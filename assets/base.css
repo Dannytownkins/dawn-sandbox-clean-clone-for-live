@@ -4361,13 +4361,25 @@ h3{font-size:var(--step-1)}
 .header__icons .header__icon svg,
 .header__icons .menu-drawer__trigger svg { width: 20px; height: 20px; }
 
-/* Cart bubble style (keep, but tidy) */
-.header__icon--cart .cart-count-bubble{
-  position: absolute; top: -4px; right: 2px;
-  background: #F7E06A; color: #111;
-  min-width: 20px; height: 20px; line-height: 20px;
-  padding: 0 6px; border-radius: 999px; font-size: 11px;
+/* Cart badge/bubble - consolidated clean style */
+.header__icon--cart .cart-count-bubble,
+.header__icon--cart .cart-badge {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  background: #F7E06A;
+  color: #111;
+  min-width: 20px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Hamburger states */
@@ -4396,12 +4408,6 @@ h3{font-size:var(--step-1)}
   box-shadow: none !important;
   color: #fff; width:44px; height:44px;
   display:inline-flex; align-items:center; justify-content:center;
-}
-.header__icon--cart .cart-count-bubble{
-  position:absolute; top:-4px; right:2px;
-  background:#F7E06A; color:#111; min-width:20px; height:20px;
-  line-height:20px; padding:0 6px; border-radius:999px; font-size:11px;
-  z-index:1;
 }
 .menu-drawer__inner-container{ background:#0b0b0c; color:#fff; }
 .menu-drawer__menu-item{ color:#fff; }
@@ -4456,6 +4462,5 @@ h3{font-size:var(--step-1)}
 
 /* MCP_HEADER_ICONS */
 .header__icons .header__icon,.header__icons .menu-drawer__trigger{background:transparent!important;border:0!important;box-shadow:none!important;color:#fff;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;position:relative;}
-.header__icon--cart .cart-count-bubble{position:absolute;top:-4px;right:2px;background:#F7E06A;color:#111;min-width:20px;height:20px;line-height:20px;padding:0 6px;border-radius:999px;font-size:11px;z-index:1;}
 .menu-drawer__inner-container{background:#0b0b0c;color:#fff;}
 .menu-drawer__menu-item{color:#fff;}
