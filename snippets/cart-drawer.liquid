@@ -142,9 +142,17 @@ div#cart-drawer.cart-drawer {
   left: auto !important;
 }
 
-/* Hide drawer when hidden attribute is present */
-#cart-drawer[hidden], .cart-drawer[hidden] {
+/* Hide drawer when hidden attribute is present - MUST BE MORE SPECIFIC */
+#cart-drawer[hidden], 
+.cart-drawer[hidden],
+#cart-drawer[hidden].cart-drawer,
+div#cart-drawer[hidden],
+div#cart-drawer[hidden].cart-drawer {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
 }
 
 /* Overlay fix - must be behind panel */
