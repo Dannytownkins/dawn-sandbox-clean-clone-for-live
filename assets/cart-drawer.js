@@ -195,7 +195,7 @@ window.CartDrawer = {
     this.drawer.style.width = '100vw';
     this.drawer.style.marginLeft = '0';
     this.drawer.style.marginRight = '0';
-    this.drawer.style.maxWidth = 'none';
+    this.drawer.style.maxWidth = '100vw'; // Override the 420px max-width rule
     this.drawer.style.minWidth = '100vw';
     this.drawer.style.display = 'block';
     

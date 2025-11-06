@@ -9,6 +9,7 @@
 
 .cart-drawer,
 #cart-drawer,
+#CartDrawer,
 div#cart-drawer,
 div#cart-drawer.cart-drawer {
   position: fixed !important;
@@ -23,7 +24,7 @@ div#cart-drawer.cart-drawer {
   margin-right: 0 !important;
   transform: none !important;
   display: block !important;
-  max-width: none !important;
+  max-width: 100vw !important;
   min-width: 100vw !important;
 }
 
