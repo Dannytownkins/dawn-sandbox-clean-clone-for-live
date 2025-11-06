@@ -388,8 +388,8 @@ textarea:focus-visible {
 
 .cart-badge {
   position: absolute;
-  top: -6px;
-  right: -6px;
+  top: -4px;
+  right: 2px;
   min-width: 20px;
   height: 20px;
   font-size: 11px;
