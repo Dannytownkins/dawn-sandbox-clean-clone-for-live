@@ -369,9 +369,11 @@
             console.log(`Image variant sync: Found matching RADIO ${inputName} with value "${inputValue}" (looking for "${valueTrimmed}", currently ${input.checked ? 'checked' : 'unchecked'})`);
             if (!input.checked) {
               // First uncheck all radios in the same group
-              const radiosWithSameName = freshVariantSelects.querySelectorAll(`input[type="radio"][name="${CSS.escape(inputName)}"]`);
-              radiosWithSameName.forEach(radio => {
-                if (radio !== input && radio.checked) {
+              // Iterate through all radios and match by name (handling newline characters)
+              const allRadios = freshVariantSelects.querySelectorAll('input[type="radio"]');
+              allRadios.forEach(radio => {
+                const radioName = (radio.name || '').trim();
+                if (radioName === inputName && radio !== input && radio.checked) {
                   radio.checked = false;
                 }
               });
