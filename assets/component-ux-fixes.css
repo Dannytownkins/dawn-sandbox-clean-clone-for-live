@@ -18,19 +18,7 @@
   text-decoration: underline;
 }
 
-/* Hover/press feedback on buttons (quick add & PDP) */
-.button,
-.shopify-payment-button__button--unbranded {
-  transition: transform 0.06s ease, box-shadow 0.2s ease;
-}
-.button:hover,
-.shopify-payment-button__button--unbranded:hover {
-  transform: translateY(-1px);
-}
-.button:active,
-.shopify-payment-button__button--unbranded:active {
-  transform: translateY(1px);
-}
+/* Button hover effects - REMOVED: Consolidated in base.css */
 
 /* Collection/catalog: larger images & tighter grid */
 .template-collection .product-grid .grid {
