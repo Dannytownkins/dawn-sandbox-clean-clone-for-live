@@ -112,13 +112,14 @@ body.drawer-open {
 }
 
 /* Dark theme base - Force right positioning - MAXIMUM SPECIFICITY */
+/* Main container should be TRANSPARENT - only overlay dims background */
 #cart-drawer, 
 #cart-drawer.cart-drawer,
 .cart-drawer,
 div#cart-drawer,
 div#cart-drawer.cart-drawer {
   color: #fff !important;
-  background: #0a0a0a !important;
+  background: transparent !important; /* Changed from #0a0a0a to transparent */
   position: fixed !important;
   top: 0 !important;
   bottom: 0 !important;
