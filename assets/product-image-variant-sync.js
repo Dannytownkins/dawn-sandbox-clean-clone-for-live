@@ -303,8 +303,11 @@
       // For radio buttons, find the one with matching value
       // For selects, find the matching option
       const valueTrimmed = value.trim();
+      let optionSet = false;
       
       inputs.forEach(input => {
+        if (optionSet) return; // Stop after first match for radio buttons
+        
         if (input.tagName === 'SELECT') {
           // Find and select the option
           const option = Array.from(input.options).find(opt => {
@@ -325,6 +328,7 @@
               // Trigger change event to update variant
               input.dispatchEvent(new Event('change', { bubbles: true }));
             }
+            optionSet = true;
           } else {
             console.log(`Image variant sync: No option found for value "${value}" in select ${input.name}`);
           }
@@ -341,6 +345,7 @@
             input.checked = true;
             input.dispatchEvent(new Event('change', { bubbles: true }));
             input.dispatchEvent(new Event('input', { bubbles: true }));
+            optionSet = true; // Stop after first match
           }
         }
       });
