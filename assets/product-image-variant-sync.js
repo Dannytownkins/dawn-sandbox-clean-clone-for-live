@@ -300,6 +300,10 @@
         return;
       }
 
+      // For radio buttons, find the one with matching value
+      // For selects, find the matching option
+      const valueTrimmed = value.trim();
+      
       inputs.forEach(input => {
         if (input.tagName === 'SELECT') {
           // Find and select the option
@@ -325,39 +329,16 @@
             console.log(`Image variant sync: No option found for value "${value}" in select ${input.name}`);
           }
         } else if (input.type === 'radio') {
-          // Find and check the radio button
-          // Get the name from the input we're iterating over (it's already in the correct group)
-          const name = (input.name || input.getAttribute('name') || '').trim();
+          // Check if this radio button matches the value we want
+          const inputValue = (input.value || '').trim();
+          const matches = inputValue.toLowerCase() === valueTrimmed.toLowerCase() || inputValue === valueTrimmed;
           
-          // Instead of using querySelector with the name (which may have newlines),
-          // find the radio button by checking all radios in the same group
-          // We know the input is already in the correct group, so find the matching value
-          const allRadiosWithSameName = variantSelects.querySelectorAll(`input[type="radio"]`);
-          const matchedRadio = Array.from(allRadiosWithSameName).find(r => {
-            const rName = (r.name || r.getAttribute('name') || '').trim();
-            const rValue = (r.value || '').trim();
-            const vValue = value.trim();
-            // Match by name (handling newlines) and value
-            return rName === name && (
-              rValue.toLowerCase() === vValue.toLowerCase() ||
-              rValue === vValue
-            );
-          });
-          
-          if (matchedRadio) {
-            console.log(`Image variant sync: Setting RADIO ${name} to ${matchedRadio.value} (was ${matchedRadio.checked ? 'checked' : 'unchecked'})`);
-            if (!matchedRadio.checked) {
-              matchedRadio.checked = true;
-              matchedRadio.dispatchEvent(new Event('change', { bubbles: true }));
+          if (matches) {
+            console.log(`Image variant sync: Setting RADIO ${input.name} to ${input.value} (was ${input.checked ? 'checked' : 'unchecked'})`);
+            if (!input.checked) {
+              input.checked = true;
+              input.dispatchEvent(new Event('change', { bubbles: true }));
             }
-          } else {
-            console.log(`Image variant sync: No radio found for value "${value}" with name "${name}"`);
-            // Debug: log all radios with this name
-            const debugRadios = Array.from(allRadiosWithSameName).filter(r => {
-              const rName = (r.name || r.getAttribute('name') || '').trim();
-              return rName === name;
-            });
-            console.log(`Image variant sync: Debug - Found ${debugRadios.length} radios with name "${name}":`, debugRadios.map(r => r.value));
           }
         }
       });
