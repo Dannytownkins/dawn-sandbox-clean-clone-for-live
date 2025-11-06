@@ -156,13 +156,21 @@
       // Find the variant(s) that use this media
       const variants = mediaToVariantMap.get(mediaId);
       
+      // Re-query variant-selects to ensure we have fresh references
+      const sectionId = variantSelects.dataset.section;
+      const freshVariantSelects = sectionId ? document.querySelector(`variant-selects[data-section="${sectionId}"]`) : variantSelects;
+      if (!freshVariantSelects) {
+        console.log('Image variant sync: Could not find variant-selects element');
+        return;
+      }
+      
       // If multiple variants use this image, try to match based on currently selected size
       // Otherwise, pick the first one
       let variant = variants[0];
       
       if (variants.length > 1) {
         // Try to find variant that matches currently selected size
-        const currentSizeInput = variantSelects.querySelector('input[type="radio"]:checked[name*="Size"], select[name*="Size"]');
+        const currentSizeInput = freshVariantSelects.querySelector('input[type="radio"]:checked[name*="Size"], select[name*="Size"]');
         if (currentSizeInput) {
           const currentSize = currentSizeInput.value || currentSizeInput.textContent;
           const matchingVariant = variants.find(v => {
@@ -176,8 +184,11 @@
       
       console.log(`Image variant sync: Found variant ${variant.id} with options:`, variant.options);
 
-      // Select the variant by setting option values
-      selectVariantByOptions(variantSelects, variant, product);
+      // Small delay to ensure previous variant change has finished
+      setTimeout(() => {
+        // Select the variant by setting option values
+        selectVariantByOptions(freshVariantSelects, variant, product);
+      }, 100);
     };
 
     // Attach listeners to thumbnails using event delegation
@@ -246,8 +257,17 @@
 
     console.log('Image variant sync: Selecting variant with options:', optionValues, 'product options:', productOptions);
 
+    // Re-query variant-selects to ensure we have fresh references after DOM updates
+    const sectionId = variantSelects.dataset.section;
+    const freshVariantSelects = sectionId ? document.querySelector(`variant-selects[data-section="${sectionId}"]`) : variantSelects;
+    if (!freshVariantSelects) {
+      console.log('Image variant sync: Could not find fresh variant-selects element');
+      return;
+    }
+
     // Get all option inputs/selects - handle both "options[...]" and "Color-1", "Size-2" formats
-    const optionInputs = Array.from(variantSelects.querySelectorAll('select[name^="options"], input[name^="options"]:not([type="hidden"]), input[type="radio"], select'));
+    // Re-query each time to ensure we have fresh DOM references
+    const optionInputs = Array.from(freshVariantSelects.querySelectorAll('select[name^="options"], input[name^="options"]:not([type="hidden"]), input[type="radio"], select'));
     
     console.log('Image variant sync: Found option inputs:', optionInputs.length);
     
