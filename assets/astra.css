@@ -606,7 +606,7 @@ textarea:focus-visible {
 
 .cart-drawer[hidden]{ display:none !important; }
 .cart-drawer { position:fixed; inset:0; z-index:70; }
-.cart-drawer__overlay { position:absolute; inset:0; background:rgba(0,0,0,.45); }
+.cart-drawer__overlay { position:absolute; inset:0; background:rgba(0,0,0,.15) !important; }
 .cart-drawer__panel {
   position:absolute; right:0; top:0; bottom:0;
   width:min(420px, 92vw);
