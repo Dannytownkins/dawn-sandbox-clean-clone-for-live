@@ -49,13 +49,7 @@
     <div class="ps-grid">
       {% assign col = collections[section.settings.collection] %}
       {% for product in col.products limit: section.settings.limit %}
-        {% render 'card-product',
-          card_product: product,
-          show_quick_add: true,
-          show_vendor: false,
-          media_aspect_ratio: section.settings.image_ratio | default: 'adapt',
-          section_id: section.id
-        %}
+        {% render 'card-product', card_product: product, show_quick_add: true, show_vendor: false, media_aspect_ratio: section.settings.image_ratio, default: 'adapt', section_id: section.id %}
       {% endfor %}
     </div>
   </div>
@@ -491,4 +485,22 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'card-product',
+              card_product: product,
+              show_quick_add: true,
+              show_vendor: false,
+              media_aspect_ratio: section.settings.image_ratio | default: 'adapt',
+              section_id: section.id
+            %}
+  to: "{% render 'card-product', card_product: product, show_quick_add: true, show_vendor:
+    false, media_aspect_ratio: section.settings.image_ratio, default: 'adapt', section_id:
+    section.id %}"
+  position: 2737..2921
+{%- endcomment -%}
